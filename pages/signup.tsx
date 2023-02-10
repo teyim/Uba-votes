@@ -1,9 +1,52 @@
 import DropdownSelect from '@components/UI/dropdownSelect';
 import { NextPage } from 'next';
 import { schools } from 'data/schools';
-import { HND_Departments } from 'data/departments';
+import { useCallback, useState } from 'react';
+import { useDepartments } from 'hooks/useDepartments';
+import { useForm } from 'react-hook-form';
+import { levels } from 'data/levels';
+import { SelectOption } from 'types';
 
 const Signup: NextPage = () => {
+  const [selectedSchool, setSelectedSchool] = useState<string>('');
+  const [selectedDepartment, setSelectedDepartment] = useState<string>('');
+  const [selectedLevel, setSelectedLevel] = useState<number>(200);
+  const department = useDepartments(selectedSchool);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const schoolSelectHandler = useCallback(
+    (selectedValue: SelectOption | undefined) =>
+      updateSchoolState(selectedValue?.value as string),
+    []
+  );
+  const departmentSelectHandler = useCallback(
+    (selectedValue: SelectOption | undefined) =>
+      setSelectedDepartment(selectedValue?.value as string),
+    []
+  );
+
+  const levelSelectHandler = useCallback(
+    (selectedValue: SelectOption | undefined) =>
+      setSelectedLevel(selectedValue?.value as number),
+    []
+  );
+
+  function updateSchoolState(selectedValue: string | undefined) {
+    setSelectedSchool(selectedValue ?? '');
+    setSelectedDepartment('');
+  }
+
+  function submitHandler(data: object) {
+    console.log(data);
+  }
+  console.log(selectedLevel);
+  console.log(selectedDepartment);
+  console.log(selectedSchool);
+
   return (
     <div className="w-screen h-screen mx-auto z-50 top-0 fixed flex justify-center items-center px-5 md:px-0">
       <div className="relative md:w-2/3 2xl:w-2/4 max-w-2/3 h-[80%] md:h[90%] flex flex-col ring-1 rounded-md shadow-sm ring-gray-600 py-8 px-6 overflow-y-scroll">
@@ -13,7 +56,7 @@ const Signup: NextPage = () => {
         <h2 className="text-lg text-center my-1 text-slate-600">
           Please enter credentials for new account
         </h2>
-        <form className="mt-2 md:px-7">
+        <form className="mt-2 md:px-7" onSubmit={handleSubmit(submitHandler)}>
           <hr className="my-4"></hr>
           <div className="md:flex justify-evenly">
             <div className="mb-6">
@@ -25,10 +68,12 @@ const Signup: NextPage = () => {
               </label>
               <input
                 type="text"
-                name="fullName"
                 className="border border-black text-gray-900 text-sm  block w-full p-2.5 rounded-md"
                 placeholder="John martin"
+                {...register('fullName')}
                 required
+                minLength={6}
+                maxLength={15}
               />
             </div>
             <div className="mb-6">
@@ -40,11 +85,22 @@ const Signup: NextPage = () => {
               </label>
               <input
                 type="text"
-                name="matricule"
+                {...register('matricule', {
+                  pattern: {
+                    value:
+                      /^(UBa)(1[0-9]|2[0-2])(G|A|H|L|S|E|C|P|Z|M|TP|T|Z|R)(\d{4})/,
+                    message: 'Matricule is invalid',
+                  },
+                })}
                 className="border border-black text-gray-900 text-sm   block w-full p-2.5 rounded-md "
                 placeholder="Uba19S0363"
                 required
+                minLength={10}
+                maxLength={10}
               />
+              <span className="text-sm text-red-500">
+                {errors?.matricule?.message as string}
+              </span>
             </div>
             <div className="mb-6">
               <label
@@ -55,28 +111,49 @@ const Signup: NextPage = () => {
               </label>
               <input
                 type="email"
-                name="email"
+                {...register('email', {
+                  pattern: {
+                    value: /^.*@gmail.com$/,
+                    message: 'Email must end with gmail.com',
+                  },
+                })}
                 className="border border-black text-gray-900 text-sm   block w-full p-2.5 rounded-md "
                 placeholder="example@gmail.com"
                 required
               />
+              <span className="text-sm text-red-500">
+                {errors?.email?.message as string}
+              </span>
             </div>
           </div>
           <div className="md:flex justify-evenly">
-            <div className="mb-6 md:w-2/5">
+            <div className="mb-6 md:w-[20%]">
               <label
-                htmlFor="lastname"
+                htmlFor="school"
+                className="block  mb-2 text-lg  font-medium text-gray-900 "
+              >
+                Level
+              </label>
+              <DropdownSelect
+                data={levels}
+                chosenOption={levelSelectHandler}
+                height={40}
+              />
+            </div>
+            <div className="mb-6 md:w-2/6">
+              <label
+                htmlFor="school"
                 className="block  mb-2 text-lg  font-medium text-gray-900 "
               >
                 School
               </label>
               <DropdownSelect
                 data={schools}
-                chosenOption={(value) => alert(value?.value)}
+                chosenOption={schoolSelectHandler}
                 height={40}
               />
             </div>
-            <div className="mb-6 md:w-2/5">
+            <div className="mb-6 md:w-2/6">
               <label
                 htmlFor="lastname"
                 className="block  mb-2 text-lg  font-medium text-gray-900 "
@@ -84,8 +161,8 @@ const Signup: NextPage = () => {
                 Department
               </label>
               <DropdownSelect
-                data={HND_Departments}
-                chosenOption={(value) => alert(value?.value)}
+                data={department}
+                chosenOption={departmentSelectHandler}
                 height={40}
               />
             </div>
