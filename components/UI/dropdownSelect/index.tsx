@@ -1,11 +1,13 @@
 import Select from 'react-select';
 import { DropdownSelectProps } from './types';
+import { memo } from 'react';
+import { SelectOption } from 'types';
 
-export default function DropdownSelect({
+function DropdownSelect({
   height,
   data,
   chosenOption,
-}: DropdownSelectProps) {
+}: DropdownSelectProps<SelectOption>) {
   const inputStyle = () => ({
     alignItems: 'center',
     display: 'flex',
@@ -14,6 +16,7 @@ export default function DropdownSelect({
   const colourStyles = {
     input: (styles: object) => ({ ...styles, ...inputStyle() }),
   };
+  console.log('child');
 
   return (
     <Select
@@ -27,7 +30,9 @@ export default function DropdownSelect({
           primary: 'black',
         },
       })}
-      onChange={(value) => chosenOption(value)}
+      required
+      onChange={(event) => chosenOption(event as SelectOption)}
     ></Select>
   );
 }
+export default memo(DropdownSelect);

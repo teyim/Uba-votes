@@ -1,7 +1,7 @@
 import { SelectOption } from 'types';
 
-export type DropdownSelectProps = {
+export type DropdownSelectProps<T> = {
   height: number;
   data: SelectOption[];
-  chosenOption: (value: SelectOption | null) => void;
+  chosenOption: (value: T) => void;
 };
