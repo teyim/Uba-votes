@@ -5,8 +5,8 @@ import { SelectOption } from 'types';
 
 function DropdownSelect({
   height,
-  data,
-  chosenOption,
+  options,
+  onChange,
 }: DropdownSelectProps<SelectOption>) {
   const inputStyle = () => ({
     alignItems: 'center',
@@ -20,7 +20,10 @@ function DropdownSelect({
 
   return (
     <Select
-      options={data}
+      name="select"
+      isClearable
+      isSearchable={false}
+      options={options}
       styles={colourStyles}
       theme={(theme) => ({
         ...theme,
@@ -31,7 +34,7 @@ function DropdownSelect({
         },
       })}
       required
-      onChange={(event) => chosenOption(event as SelectOption)}
+      onChange={(event) => onChange(event as SelectOption)}
     ></Select>
   );
 }
