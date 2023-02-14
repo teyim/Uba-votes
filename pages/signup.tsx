@@ -1,22 +1,56 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import DropdownSelect from '@components/UI/dropdownSelect';
 import { NextPage } from 'next';
 import { schools } from 'data/schools';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { useDepartments } from 'hooks/useDepartments';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { levels } from 'data/levels';
-import { SelectOption } from 'types';
+import { RegisterInput, SelectOption } from 'types';
+import { signUp } from 'helpers/auth';
+import { useMutation } from '@tanstack/react-query';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Signup: NextPage = () => {
   const [selectedSchool, setSelectedSchool] = useState<string>('');
   const [selectedDepartment, setSelectedDepartment] = useState<string>('');
-  const [selectedLevel, setSelectedLevel] = useState<number>(200);
+  const [selectedLevel, setSelectedLevel] = useState<number>(0);
   const department = useDepartments(selectedSchool);
   const {
+    control,
+    reset,
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
   } = useForm();
+
+  // useEffect(() => {
+  //   if (isSubmitSuccessful) {
+  //     reset();
+  //     setSelectedDepartment('');
+  //     setSelectedLevel(0);
+  //     setSelectedSchool('');
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [isSubmitSuccessful]);
+
+  const { mutate, isLoading } = useMutation(
+    (userData: RegisterInput) => signUp(userData),
+    {
+      onSuccess(data) {
+        toast(data?.message);
+      },
+      onError(error: any) {
+        if (Array.isArray((error as any).response.data.error)) {
+          (error as any).response.data.error.forEach((el: any) =>
+            toast.error(el.message)
+          );
+        } else {
+          toast((error as any).response.data.message);
+        }
+      },
+    }
+  );
 
   const schoolSelectHandler = useCallback(
     (selectedValue: SelectOption | undefined) =>
@@ -41,23 +75,29 @@ const Signup: NextPage = () => {
   }
 
   function submitHandler(data: object) {
-    console.log(data);
+    // ? Execute the M   mutate(data);
+    const updatedData = {
+      ...data,
+      level: selectedLevel,
+      school: selectedSchool,
+      department: selectedDepartment,
+    };
+    console.log(updatedData);
   }
-  console.log(selectedLevel);
-  console.log(selectedDepartment);
-  console.log(selectedSchool);
 
   return (
-    <div className="w-screen h-screen mx-auto z-50 top-0 fixed flex justify-center items-center px-5 md:px-0">
-      <div className="relative md:w-2/3 2xl:w-2/4 max-w-2/3 h-[80%] md:h[90%] flex flex-col ring-1 rounded-md shadow-sm ring-gray-600 py-8 px-6 overflow-y-scroll">
+    <div className="w-screen h-screen mx-auto z-50 top-0 fixed flex flex-col justify-center items-center px-5 md:px-0">
+      <Toaster />
+      <div className="mx-auto mt-5">
         <h1 className="bold text-4xl text-center text-violet-600 font-bold font-unbounded">
           Create Account
         </h1>
         <h2 className="text-lg text-center my-1 text-slate-600">
           Please enter credentials for new account
         </h2>
+      </div>
+      <div className="relative w-full md:w-2/3 2xl:w-2/4 max-w-2/3  h-[80%] md:h[90%] flex flex-col ring-1 rounded-md shadow-sm ring-gray-600 py-8 px-6 overflow-y-scroll">
         <form className="mt-2 md:px-7" onSubmit={handleSubmit(submitHandler)}>
-          <hr className="my-4"></hr>
           <div className="md:flex justify-evenly">
             <div className="mb-6">
               <label
@@ -135,8 +175,8 @@ const Signup: NextPage = () => {
                 Level
               </label>
               <DropdownSelect
-                data={levels}
-                chosenOption={levelSelectHandler}
+                options={levels}
+                onChange={levelSelectHandler}
                 height={40}
               />
             </div>
@@ -148,8 +188,8 @@ const Signup: NextPage = () => {
                 School
               </label>
               <DropdownSelect
-                data={schools}
-                chosenOption={schoolSelectHandler}
+                options={schools}
+                onChange={schoolSelectHandler}
                 height={40}
               />
             </div>
@@ -161,8 +201,8 @@ const Signup: NextPage = () => {
                 Department
               </label>
               <DropdownSelect
-                data={department}
-                chosenOption={departmentSelectHandler}
+                options={department}
+                onChange={departmentSelectHandler}
                 height={40}
               />
             </div>
@@ -177,9 +217,9 @@ const Signup: NextPage = () => {
               </label>
               <input
                 type="password"
-                name="password"
-                className=" border border-black text-gray-900 text-sm   block w-full p-2.5 rounded-md"
+                className="border border-black text-gray-900 text-sm   block w-full p-2.5 rounded-md"
                 placeholder="Enter password"
+                {...register('password')}
                 required
               />
             </div>
@@ -201,11 +241,24 @@ const Signup: NextPage = () => {
           </div>
           <button
             type="submit"
-            className="py-2 px-4  hover:border-2 text-black block ring-2 ring-gray-700 hover:bg-violet-600 hover:text-white rounded-md text-lg font-semibold mx-auto my-4"
+            className="py-2 px-4  hover:border-2 text-black block ring-2 ring-gray-700 hover:bg-violet-600 hover:text-white rounded-md text-lg font-semibold mx-auto my-4 disabled:bg-gray-500 disabled:text-black disabled:ring-0 disabled:border-0"
+            disabled={
+              !selectedDepartment || !selectedLevel || !selectedSchool
+                ? true
+                : false
+            }
           >
             Create Account
           </button>
         </form>
+        {!selectedDepartment ? (
+          <span className="text-sm text-red-500 text-center">
+            please select appropriate Department under the school{' '}
+            {selectedSchool}
+          </span>
+        ) : (
+          ''
+        )}
         <h3 className="text-center my-2">
           Already have an account?{' '}
           <button className="font-semibold cursor-pointer hover:text-violet-600 hover:underline">
