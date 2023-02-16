@@ -4,7 +4,7 @@ import { NextPage } from 'next';
 import { schools } from 'data/schools';
 import { useCallback, useState, useEffect } from 'react';
 import { useDepartments } from 'hooks/useDepartments';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { levels } from 'data/levels';
 import { RegisterInput, SelectOption } from 'types';
 import { signUp } from 'helpers/auth';
@@ -38,7 +38,7 @@ const Signup: NextPage = () => {
     (userData: RegisterInput) => signUp(userData),
     {
       onSuccess(data) {
-        toast(data?.message);
+        toast.success(data?.message);
       },
       onError(error: any) {
         if (Array.isArray((error as any).response.data.error)) {
@@ -46,7 +46,7 @@ const Signup: NextPage = () => {
             toast.error(el.message)
           );
         } else {
-          toast((error as any).response.data.message);
+          toast.error(error.response.data);
         }
       },
     }
@@ -74,7 +74,7 @@ const Signup: NextPage = () => {
     setSelectedDepartment('');
   }
 
-  function submitHandler(data: object) {
+  function submitHandler(data: any) {
     // ? Execute the M   mutate(data);
     const updatedData = {
       ...data,
@@ -82,7 +82,7 @@ const Signup: NextPage = () => {
       school: selectedSchool,
       department: selectedDepartment,
     };
-    console.log(updatedData);
+    mutate(updatedData);
   }
 
   return (
@@ -243,15 +243,18 @@ const Signup: NextPage = () => {
             type="submit"
             className="py-2 px-4  hover:border-2 text-black block ring-2 ring-gray-700 hover:bg-violet-600 hover:text-white rounded-md text-lg font-semibold mx-auto my-4 disabled:bg-gray-500 disabled:text-black disabled:ring-0 disabled:border-0"
             disabled={
-              !selectedDepartment || !selectedLevel || !selectedSchool
+              !selectedDepartment ||
+              !selectedLevel ||
+              !selectedSchool ||
+              isLoading
                 ? true
                 : false
             }
           >
-            Create Account
+            {isLoading ? 'Creating Account...' : ' Create Account'}
           </button>
         </form>
-        {!selectedDepartment ? (
+        {!selectedDepartment && selectedSchool ? (
           <span className="text-sm text-red-500 text-center">
             please select appropriate Department under the school{' '}
             {selectedSchool}
@@ -259,6 +262,7 @@ const Signup: NextPage = () => {
         ) : (
           ''
         )}
+
         <h3 className="text-center my-2">
           Already have an account?{' '}
           <button className="font-semibold cursor-pointer hover:text-violet-600 hover:underline">
