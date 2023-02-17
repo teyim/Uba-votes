@@ -10,19 +10,36 @@ import { RegisterInput, SelectOption } from 'types';
 import { signUp } from 'helpers/auth';
 import { useMutation } from '@tanstack/react-query';
 import toast, { Toaster } from 'react-hot-toast';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const Signup: NextPage = () => {
   const [selectedSchool, setSelectedSchool] = useState<string>('');
   const [selectedDepartment, setSelectedDepartment] = useState<string>('');
   const [selectedLevel, setSelectedLevel] = useState<number>(0);
   const department = useDepartments(selectedSchool);
+
+  const formSchema = Yup.object().shape({
+    password: Yup.string()
+      .required('Password is mendatory')
+      .min(6, 'Password must be at 6 char long'),
+    confirmPwd: Yup.string()
+      .required('Password is mendatory')
+      .oneOf([Yup.ref('password')], 'Passwords does not match'),
+  });
+  const formOptions = { resolver: yupResolver(formSchema) };
+
+  const router = useRouter();
+
   const {
     control,
     reset,
     register,
     handleSubmit,
     formState: { errors, isSubmitSuccessful },
-  } = useForm();
+  } = useForm(formOptions);
 
   // useEffect(() => {
   //   if (isSubmitSuccessful) {
@@ -34,22 +51,8 @@ const Signup: NextPage = () => {
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [isSubmitSuccessful]);
 
-  const { mutate, isLoading } = useMutation(
-    (userData: RegisterInput) => signUp(userData),
-    {
-      onSuccess(data) {
-        toast.success(data?.message);
-      },
-      onError(error: any) {
-        if (Array.isArray((error as any).response.data.error)) {
-          (error as any).response.data.error.forEach((el: any) =>
-            toast.error(el.message)
-          );
-        } else {
-          toast.error(error.response.data);
-        }
-      },
-    }
+  const { mutate, isLoading } = useMutation((userData: RegisterInput) =>
+    signUp(userData)
   );
 
   const schoolSelectHandler = useCallback(
@@ -74,15 +77,33 @@ const Signup: NextPage = () => {
     setSelectedDepartment('');
   }
 
-  function submitHandler(data: any) {
-    // ? Execute the M   mutate(data);
-    const updatedData = {
-      ...data,
+  function submitHandler(signUpData: any) {
+    // ? Execute the mutate;
+    const data = {
+      ...signUpData,
       level: selectedLevel,
       school: selectedSchool,
       department: selectedDepartment,
     };
-    mutate(updatedData);
+
+    delete data.confirmPwd;
+    console.log(signUpData);
+
+    mutate(data, {
+      onSuccess(data) {
+        toast.success(data?.message);
+        router.push('/login');
+      },
+      onError(error: any) {
+        if (Array.isArray((error as any).response.data.error)) {
+          (error as any).response.data.error.forEach((el: any) =>
+            toast.error(el.message)
+          );
+        } else {
+          toast.error(error.response.data);
+        }
+      },
+    });
   }
 
   return (
@@ -220,8 +241,13 @@ const Signup: NextPage = () => {
                 className="border border-black text-gray-900 text-sm   block w-full p-2.5 rounded-md"
                 placeholder="Enter password"
                 {...register('password')}
+                minLength={6}
+                maxLength={10}
                 required
               />
+              <span className="text-sm text-red-500">
+                {errors?.password?.message as string}
+              </span>
             </div>
             <div className="mb-6 md:w-2/5">
               <label
@@ -232,11 +258,16 @@ const Signup: NextPage = () => {
               </label>
               <input
                 type="password"
-                name="passwordConfirmation"
                 className=" border border-black text-gray-900 text-sm block w-full p-2.5 rounded-md"
+                {...register('confirmPwd')}
                 placeholder="Confirm password"
+                minLength={6}
+                maxLength={10}
                 required
               />
+              <span className="text-sm text-red-500">
+                {errors?.confirmPwd?.message as string}
+              </span>
             </div>
           </div>
           <button
@@ -265,9 +296,11 @@ const Signup: NextPage = () => {
 
         <h3 className="text-center my-2">
           Already have an account?{' '}
-          <button className="font-semibold cursor-pointer hover:text-violet-600 hover:underline">
-            Login
-          </button>
+          <Link passHref href="/login">
+            <a className="font-semibold cursor-pointer hover:text-violet-600 hover:underline">
+              Login
+            </a>
+          </Link>
         </h3>
       </div>
     </div>
