@@ -12,3 +12,8 @@ export type RegisterInput = {
   department: string;
   password: string;
 };
+
+export type LoginInput = {
+  matricule: string;
+  password: string;
+};

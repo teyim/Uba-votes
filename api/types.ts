@@ -24,7 +24,5 @@ export interface GenericResponse {
 
 export interface ILoginResponse {
   status: string;
-  data: {
-    user: IUser;
-  };
+  user: IUser;
 }
