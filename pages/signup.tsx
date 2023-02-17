@@ -22,10 +22,35 @@ const Signup: NextPage = () => {
   const department = useDepartments(selectedSchool);
 
   const formSchema = Yup.object().shape({
+    fullName: Yup.string()
+      .trim()
+      .required('first name is required')
+      .min(6, 'first name must be atleat 6 character')
+      .max(30, 'first name must be at most 15 characters'),
+    email: Yup.string()
+      .email('Invalid email format')
+      .trim()
+      .matches(/^.*@gmail.com$/, 'Email must end with gmail.com')
+      .required('Your email is required'),
+    matricule: Yup.string()
+      .trim()
+      .min(10, 'Your matricule needs to be 10 characters')
+      .max(10, 'Your matricule exceeds 10 characters')
+      .matches(
+        /^(UBa)(1[0-9]|2[0-2])(G|A|H|L|S|E|C|P|Z|M|TP|T|Z|R)(\d{4})/,
+        'matricule is not valid'
+      )
+      .required('matricule is mandatory'),
     password: Yup.string()
+      .trim()
       .required('Password is mendatory')
-      .min(6, 'Password must be at 6 char long'),
+      .matches(
+        /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+        'Password must contain at least 8 characters, one uppercase, one number and one special case character'
+      )
+      .min(8, 'Password must be at 8 char long'),
     confirmPwd: Yup.string()
+      .trim()
       .required('Password is mendatory')
       .oneOf([Yup.ref('password')], 'Passwords does not match'),
   });
@@ -132,10 +157,10 @@ const Signup: NextPage = () => {
                 className="border border-black text-gray-900 text-sm  block w-full p-2.5 rounded-md"
                 placeholder="John martin"
                 {...register('fullName')}
-                required
-                minLength={6}
-                maxLength={15}
               />
+              <span className="text-sm text-red-500">
+                {errors?.fullName?.message as string}
+              </span>
             </div>
             <div className="mb-6">
               <label
@@ -146,18 +171,9 @@ const Signup: NextPage = () => {
               </label>
               <input
                 type="text"
-                {...register('matricule', {
-                  pattern: {
-                    value:
-                      /^(UBa)(1[0-9]|2[0-2])(G|A|H|L|S|E|C|P|Z|M|TP|T|Z|R)(\d{4})/,
-                    message: 'Matricule is invalid',
-                  },
-                })}
+                {...register('matricule')}
                 className="border border-black text-gray-900 text-sm   block w-full p-2.5 rounded-md "
                 placeholder="Uba19S0363"
-                required
-                minLength={10}
-                maxLength={10}
               />
               <span className="text-sm text-red-500">
                 {errors?.matricule?.message as string}
@@ -172,15 +188,9 @@ const Signup: NextPage = () => {
               </label>
               <input
                 type="email"
-                {...register('email', {
-                  pattern: {
-                    value: /^.*@gmail.com$/,
-                    message: 'Email must end with gmail.com',
-                  },
-                })}
+                {...register('email')}
                 className="border border-black text-gray-900 text-sm   block w-full p-2.5 rounded-md "
                 placeholder="example@gmail.com"
-                required
               />
               <span className="text-sm text-red-500">
                 {errors?.email?.message as string}
@@ -241,9 +251,6 @@ const Signup: NextPage = () => {
                 className="border border-black text-gray-900 text-sm   block w-full p-2.5 rounded-md"
                 placeholder="Enter password"
                 {...register('password')}
-                minLength={6}
-                maxLength={10}
-                required
               />
               <span className="text-sm text-red-500">
                 {errors?.password?.message as string}
@@ -261,9 +268,6 @@ const Signup: NextPage = () => {
                 className=" border border-black text-gray-900 text-sm block w-full p-2.5 rounded-md"
                 {...register('confirmPwd')}
                 placeholder="Confirm password"
-                minLength={6}
-                maxLength={10}
-                required
               />
               <span className="text-sm text-red-500">
                 {errors?.confirmPwd?.message as string}

@@ -13,9 +13,18 @@ import { useRouter } from 'next/router';
 
 const Login: NextPage = () => {
   const formSchema = Yup.object().shape({
+    matricule: Yup.string()
+      .trim()
+      .min(10, 'Your matricule needs to be 10 characters')
+      .max(10, 'Your matricule exceeds 10 characters')
+      .matches(
+        /^(UBa)(1[0-9]|2[0-2])(G|A|H|L|S|E|C|P|Z|M|TP|T|Z|R)(\d{4})/,
+        'matricule is not valid'
+      ),
     password: Yup.string()
+      .trim()
       .required('Password is mendatory')
-      .min(6, 'Password must be at 6 char long'),
+      .min(8, 'Password must be at 8 char long'),
   });
   const formOptions = { resolver: yupResolver(formSchema) };
   const queryClient = useQueryClient();
@@ -29,16 +38,6 @@ const Login: NextPage = () => {
     handleSubmit,
     formState: { errors, isSubmitSuccessful },
   } = useForm(formOptions);
-
-  // useEffect(() => {
-  //   if (isSubmitSuccessful) {
-  //     reset();
-  //     setSelectedDepartment('');
-  //     setSelectedLevel(0);
-  //     setSelectedSchool('');
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [isSubmitSuccessful]);
 
   const { mutate, isLoading } = useMutation(
     (userData: LoginInput) => login(userData),
@@ -92,18 +91,9 @@ const Login: NextPage = () => {
               </label>
               <input
                 type="text"
-                {...register('matricule', {
-                  pattern: {
-                    value:
-                      /^(UBa)(1[0-9]|2[0-2])(G|A|H|L|S|E|C|P|Z|M|TP|T|Z|R)(\d{4})/,
-                    message: 'Matricule is invalid',
-                  },
-                })}
+                {...register('matricule')}
                 className="border border-black text-gray-900 text-sm   block w-full p-2.5 rounded-md "
-                placeholder="Uba19S0363"
-                required
-                minLength={10}
-                maxLength={10}
+                placeholder="UBa19S0111"
               />
               <span className="text-sm text-red-500">
                 {errors?.matricule?.message as string}
@@ -121,9 +111,6 @@ const Login: NextPage = () => {
                 className="border border-black text-gray-900 text-sm   block w-full p-2.5 rounded-md"
                 placeholder="Enter password"
                 {...register('password')}
-                minLength={6}
-                maxLength={10}
-                required
               />
               <span className="text-sm text-red-500">
                 {errors?.password?.message as string}
