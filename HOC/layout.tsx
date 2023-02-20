@@ -1,4 +1,4 @@
-import Navbar from '@components/global/navbar';
+import Navbar from '@components/Layout/Navbar/navbar';
 import { useRouter } from 'next/router';
 
 type LayoutProps = {
@@ -16,7 +16,7 @@ function Layout({ children }: LayoutProps) {
   return (
     <section className="overflow-hidden font-roboto">
       {showNav && <Navbar />}
-      {children}
+      <section>{children}</section>
     </section>
   );
 }
