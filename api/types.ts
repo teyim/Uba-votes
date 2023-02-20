@@ -4,6 +4,31 @@ type Vote = {
   _id: string;
 };
 
+export type Candidate = {
+  _id: string;
+  fullName: string;
+  bio: string;
+  matricule: string;
+  age: number;
+  sex: string;
+  image: string;
+  votes: number;
+};
+
+export interface ICampaign {
+  _id: string;
+  name: string;
+  desc: string;
+  startTime: string;
+  endTime: string;
+  votingPositings: string[];
+  allowedDepartment: string;
+  allowedSchool: string;
+  allowedLevel: number;
+  candidates: Candidate[];
+  __v: number;
+}
+
 export interface IUser {
   _id: string;
   fullName: string;

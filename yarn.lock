@@ -194,6 +194,18 @@
   dependencies:
     "@floating-ui/core" "^1.2.0"
 
+"@headlessui/react@^1.7.11":
+  version "1.7.11"
+  resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-1.7.11.tgz#1cc5750226abe5af2c94f72e975c0c8d2f5cc5a6"
+  integrity sha512-EaDbVgcyiylhtskZZf4Qb/JiiByY7cYbd0qgZ9xm2pm2X7hKojG0P4TaQYKgPOV3vojPhd/pZyQh3nmRkkcSyw==
+  dependencies:
+    client-only "^0.0.1"
+
+"@heroicons/react@^2.0.16":
+  version "2.0.16"
+  resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-2.0.16.tgz#562883c19ba2690c83380b42a9a5cce39dcbdb4a"
+  integrity sha512-x89rFxH3SRdYaA+JCXwfe+RkE1SFTo9GcOkZettHer71Y3T7V+ogKmfw5CjTazgS3d0ClJ7p1NA+SP7VQLQcLw==
+
 "@hookform/resolvers@^2.9.11":
   version "2.9.11"
   resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-2.9.11.tgz#9ce96e7746625a89239f68ca57c4f654264c17ef"
@@ -766,6 +778,11 @@ chokidar@^3.5.3:
     readdirp "~3.6.0"
   optionalDependencies:
     fsevents "~2.3.2"
+
+client-only@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/client-only/-/client-only-0.0.1.tgz#38bba5d403c41ab150bff64a95c85013cf73bca1"
+  integrity sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==
 
 color-convert@^1.9.0:
   version "1.9.3"
@@ -2253,6 +2270,11 @@ react-hot-toast@^2.4.0:
   integrity sha512-qnnVbXropKuwUpriVVosgo8QrB+IaPJCpL8oBI6Ov84uvHZ5QQcTp2qg6ku2wNfgJl6rlQXJIQU5q+5lmPOutA==
   dependencies:
     goober "^2.1.10"
+
+react-icons@^4.7.1:
+  version "4.7.1"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.7.1.tgz#0f4b25a5694e6972677cb189d2a72eabea7a8345"
+  integrity sha512-yHd3oKGMgm7zxo3EA7H2n7vxSoiGmHk5t6Ou4bXsfcgWyhfDKMpyKfhHR6Bjnn63c+YXBLBPUql9H4wPJM6sXw==
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
