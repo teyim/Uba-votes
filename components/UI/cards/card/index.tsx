@@ -3,7 +3,7 @@ import { CardProps } from './types';
 
 function Card({ department, desc, level, name, school }: CardProps) {
   return (
-    <div className="p-4 rounded-md shadow-md ring-1 ring-gray-500 ">
+    <div className="p-4 rounded-md shadow-md ring-1 ring-gray-500 my-6">
       <div className="flex flex-col items-center text-center">
         <h1 className="text-lg font-semibold font-unbounded text-gray-800">
           {name}

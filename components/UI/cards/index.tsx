@@ -1,10 +1,14 @@
 import { ICampaign } from 'api/types';
 import Card from './card';
 
-function Cards(data: ICampaign[]) {
+type CardsProps = {
+  data: ICampaign[] | [] | undefined;
+};
+
+function Cards({ data }: CardsProps) {
   return (
     <>
-      {data.map((campaign) => (
+      {data?.map((campaign) => (
         <Card
           key={campaign._id}
           department={campaign.allowedDepartment}
