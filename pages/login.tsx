@@ -4,12 +4,18 @@ import { NextPage } from 'next';
 import { useForm } from 'react-hook-form';
 import { LoginInput } from 'types';
 import { login } from 'helpers/auth';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  QueryClient,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
 import toast, { Toaster } from 'react-hot-toast';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import * as Yup from 'yup';
 import { useRouter } from 'next/router';
+import { storage } from 'utils/storage';
+import { IUser } from 'api/types';
 
 const Login: NextPage = () => {
   const formSchema = Yup.object().shape({
@@ -44,7 +50,6 @@ const Login: NextPage = () => {
     {
       onSuccess(data) {
         queryClient.setQueryData(['userData'], data);
-        console.log(data);
       },
     }
   );
@@ -54,7 +59,11 @@ const Login: NextPage = () => {
     mutate(data, {
       onSuccess() {
         toast.success('Login Successfull');
-        router.push('/campaigns');
+        const data = queryClient.getQueryData(['userData']);
+        storage.setUser(data as IUser);
+        if (storage.getUser().token) {
+          router.push('/campaigns');
+        }
       },
       onError(error: any) {
         if (Array.isArray((error as any).response.data.error)) {
