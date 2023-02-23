@@ -4,10 +4,11 @@ import { BsChevronDown } from 'react-icons/bs';
 import { BiUserCircle } from 'react-icons/bi';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { CgUserlane } from 'react-icons/cg';
+import { storage } from 'utils/storage';
 
 export default function navbarDropdown(props: any) {
   const { customStyle } = props;
-  const userFullNames = `Hello`;
+  const userFullNames = storage.getUser().fullName;
 
   const handlelogOut = () => {
     alert('hello');
@@ -18,9 +19,7 @@ export default function navbarDropdown(props: any) {
         <div className="">
           <Menu.Button className="inline-flex justify-evenly  w-full px-4 py-2 text-sm font-medium text-gray-700 text-md rounded-md ">
             <CgUserlane className="w-5 h-5 mx-1 text-violet-600" />
-            <span className="my-auto">
-              Hey! {userFullNames?.length > 15 ? 'hello' : userFullNames}
-            </span>
+            <span className="my-auto">Hey! {userFullNames}</span>
             <BsChevronDown
               className="w-5 h-5 ml-2 -mr-1 my-auto text-gray-400 hover:text-violet-100"
               aria-hidden="true"
