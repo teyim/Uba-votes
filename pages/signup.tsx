@@ -117,7 +117,7 @@ const Signup: NextPage = () => {
     mutate(data, {
       onSuccess(data) {
         toast.success(data?.message);
-        router.push('/login');
+        router.replace('/login');
       },
       onError(error: any) {
         if (Array.isArray((error as any).response.data.error)) {
