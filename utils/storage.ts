@@ -1,8 +1,22 @@
+import { persist, devtools } from 'zustand/middleware';
+import { create } from 'zustand';
 import { IUser } from 'api/types';
 
-export const storage = {
-  getUser: () => JSON.parse(window.localStorage.getItem('userData') || 'null'),
-  setUser: (data: IUser) =>
-    window.localStorage.setItem('userData', JSON.stringify(data)),
-  clearUser: () => window.localStorage.removeItem('userData'),
+type UserState = {
+  user: IUser | null;
+  setUser: (user: IUser) => void;
+  clearUser: () => void;
 };
+
+export const useStore = create<UserState>()(
+  devtools(
+    persist(
+      (set) => ({
+        user: null,
+        setUser: (userData: IUser) => set(() => ({ user: userData })),
+        clearUser: () => set(() => ({ user: null })),
+      }),
+      persist
+    )
+  )
+);

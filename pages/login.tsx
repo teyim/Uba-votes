@@ -14,8 +14,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import * as Yup from 'yup';
 import { useRouter } from 'next/router';
-import { storage } from 'utils/storage';
 import { IUser } from 'api/types';
+import shallow from 'zustand/shallow';
+import { useStore } from '../utils/storage';
 
 const Login: NextPage = () => {
   const formSchema = Yup.object().shape({
@@ -36,7 +37,10 @@ const Login: NextPage = () => {
   const queryClient = useQueryClient();
 
   const router = useRouter();
-
+  const { setUser, user } = useStore((state) => ({
+    setUser: state.setUser,
+    user: state.user,
+  }));
   const {
     control,
     reset,
@@ -60,8 +64,8 @@ const Login: NextPage = () => {
       onSuccess() {
         toast.success('Login Successfull');
         const data = queryClient.getQueryData(['userData']);
-        storage.setUser(data as IUser);
-        if (storage.getUser().token) {
+        setUser(data as IUser);
+        if (data) {
           router.push('/campaigns');
         }
       },
