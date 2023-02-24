@@ -1,25 +1,32 @@
 import { Menu, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { BsChevronDown } from 'react-icons/bs';
 import { BiUserCircle } from 'react-icons/bi';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { CgUserlane } from 'react-icons/cg';
-import { storage } from 'utils/storage';
+import { useStore } from 'utils/storage';
+import { useRouter } from 'next/router';
 
-export default function navbarDropdown(props: any) {
+export default function NavbarDropdown(props: any) {
   const { customStyle } = props;
-  const userFullNames = storage.getUser().fullName;
+  const router = useRouter();
 
-  const handlelogOut = () => {
-    alert('hello');
+  const { user, clearUser } = useStore((state) => ({
+    user: state.user,
+    clearUser: state.clearUser,
+  }));
+  const handleLogOut = () => {
+    clearUser();
+    router.replace('/');
   };
+
   return (
     <div className={customStyle + ' my-auto text-right font-rubik z-50 '}>
       <Menu as="div" className="inline-block text-left">
         <div className="">
           <Menu.Button className="inline-flex justify-evenly  w-full px-4 py-2 text-sm font-medium text-gray-700 text-md rounded-md ">
             <CgUserlane className="w-5 h-5 mx-1 text-violet-600" />
-            <span className="my-auto">Hey! {userFullNames}</span>
+            <span className="my-auto">Hey! {user?.fullName}</span>
             <BsChevronDown
               className="w-5 h-5 ml-2 -mr-1 my-auto text-gray-400 hover:text-violet-100"
               aria-hidden="true"
@@ -43,7 +50,7 @@ export default function navbarDropdown(props: any) {
                     className={`${
                       active ? 'text-indigo-700' : 'text-gray-900'
                     } group flex rounded-md items-center w-full px-2 py-2 text-md`}
-                    onClick={handlelogOut}
+                    onClick={handleLogOut}
                   >
                     {active ? (
                       <AiOutlineLogout

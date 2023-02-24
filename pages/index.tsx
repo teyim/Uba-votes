@@ -2,8 +2,13 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import handImage from '@public/images/hand.png';
 import Link from 'next/link';
+import { useStore } from 'utils/storage';
 
 const Home: NextPage = () => {
+  const { user } = useStore((state) => ({
+    user: state.user,
+  }));
+
   return (
     <div className="h-screen md:w-screen  bg-gradient-to-tl from-indigo-500 to-violet-600 lg:px-8 px-3 py-8 font-roboto text-gray-200 overflow-hidden ">
       <nav className="max-w-screen-2xl  text-2xl font-unbounded lg:px-20 text-center lg:text-left">
@@ -23,17 +28,27 @@ const Home: NextPage = () => {
             using your smart or pc .vote fast and get to see who will be your
             next Class/Department leader.
           </h2>
-          <Link href="/signup" passHref>
-            <a className="text-lg text-center mt-5 ring-1 ring-gray-300 bg-gray-300 bg-opacity-10 w-2/4 py-3 rounded-md hover:bg-orange-300 hover:ring-orange-300 hover:text-gray-800">
-              Signup
-            </a>
-          </Link>
+          {!user ? (
+            <>
+              <Link href="/signup" passHref>
+                <a className="text-lg text-center mt-5 ring-1 ring-gray-300 bg-gray-300 bg-opacity-10 w-2/4 py-3 rounded-md hover:bg-orange-300 hover:ring-orange-300 hover:text-gray-800">
+                  Signup
+                </a>
+              </Link>
 
-          <Link href="/login" passHref>
-            <a className="mt-5 w-2/4  text-orange-300 hover:underline ">
-              Already have an account?
-            </a>
-          </Link>
+              <Link href="/login" passHref>
+                <a className="mt-5 w-2/4  text-orange-300 hover:underline ">
+                  Already have an account?
+                </a>
+              </Link>
+            </>
+          ) : (
+            <Link href="/campaigns" passHref>
+              <a className="text-lg text-center mt-5 ring-1 ring-gray-300 bg-gray-300 bg-opacity-10 w-2/4 py-3 rounded-md hover:bg-orange-300 hover:ring-orange-300 hover:text-gray-800">
+                View Campaigns
+              </a>
+            </Link>
+          )}
         </div>
         <div className="hidden lg:flex p-2 w-1/2 ">
           <Image src={handImage} alt="hand image" />
