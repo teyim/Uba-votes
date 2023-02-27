@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { CardProps } from './types';
 
-function Card({ department, desc, level, name, school }: CardProps) {
+function Card({ department, desc, level, name, school, id }: CardProps) {
   return (
     <div className="p-4 rounded-md shadow-md ring-1 ring-gray-500 my-6">
       <div className="flex flex-col items-center text-center">
@@ -28,7 +28,7 @@ function Card({ department, desc, level, name, school }: CardProps) {
             remaining time:<span className="text-green-600">23min</span>
           </h4>
         </div>
-        <Link href="/campaign">
+        <Link href={`/campaigns/${id}`}>
           <a className="py-2 px-4  hover:border-2 text-black block ring-2 ring-gray-700 hover:bg-violet-600 hover:text-white rounded-md text-lg font-semibold mx-auto my-4 disabled:bg-gray-500 disabled:text-black disabled:ring-0 disabled:border-0">
             View Campaign
           </a>

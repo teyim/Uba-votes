@@ -4,4 +4,5 @@ export type CardProps = {
   school: string;
   department: string;
   level: number;
+  id: string;
 };
