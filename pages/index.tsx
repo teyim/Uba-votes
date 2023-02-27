@@ -3,11 +3,18 @@ import Image from 'next/image';
 import handImage from '@public/images/hand.png';
 import Link from 'next/link';
 import { useStore } from 'utils/storage';
+import { useEffect, useState } from 'react';
+import { IUser } from 'api/types';
 
 const Home: NextPage = () => {
+  const [userData, setUserData] = useState<IUser | null>(null);
   const { user } = useStore((state) => ({
     user: state.user,
   }));
+
+  useEffect(() => {
+    setUserData(user);
+  }, []);
 
   return (
     <div className="h-screen md:w-screen  bg-gradient-to-tl from-indigo-500 to-violet-600 lg:px-8 px-3 py-8 font-roboto text-gray-200 overflow-hidden ">
@@ -28,7 +35,7 @@ const Home: NextPage = () => {
             using your smart or pc .vote fast and get to see who will be your
             next Class/Department leader.
           </h2>
-          {!user ? (
+          {!userData ? (
             <>
               <Link href="/signup" passHref>
                 <a className="text-lg text-center mt-5 ring-1 ring-gray-300 bg-gray-300 bg-opacity-10 w-2/4 py-3 rounded-md hover:bg-orange-300 hover:ring-orange-300 hover:text-gray-800">
