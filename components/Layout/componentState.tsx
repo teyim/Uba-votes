@@ -14,7 +14,11 @@ function ComponentState({
 }: ComponentStateProps) {
   return (
     <div className="mx-auto">
-      {isLoading && <h1>Loading {currentComponent}......</h1>}
+      {isLoading && (
+        <h1 className="text-center text-xl">
+          Loading {currentComponent}......
+        </h1>
+      )}
       {isEmpty && <h1>No available {currentComponent}</h1>}
     </div>
   );
