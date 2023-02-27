@@ -6,8 +6,12 @@ import { AiOutlineLogout } from 'react-icons/ai';
 import { CgUserlane } from 'react-icons/cg';
 import { useStore } from 'utils/storage';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { IUser } from 'api/types';
 
 export default function NavbarDropdown(props: any) {
+  const [userData, setUserData] = useState<IUser | null>(null);
+
   const { customStyle } = props;
   const router = useRouter();
 
@@ -15,6 +19,11 @@ export default function NavbarDropdown(props: any) {
     user: state.user,
     clearUser: state.clearUser,
   }));
+
+  useEffect(() => {
+    setUserData(user);
+  }, []);
+
   const handleLogOut = () => {
     clearUser();
     router.replace('/');
@@ -26,7 +35,7 @@ export default function NavbarDropdown(props: any) {
         <div className="">
           <Menu.Button className="inline-flex justify-evenly  w-full px-4 py-2 text-sm font-medium text-gray-700 text-md rounded-md ">
             <CgUserlane className="w-5 h-5 mx-1 text-violet-600" />
-            <span className="my-auto">Hey! {user?.fullName}</span>
+            <span className="my-auto">Hey! {userData?.fullName}</span>
             <BsChevronDown
               className="w-5 h-5 ml-2 -mr-1 my-auto text-gray-400 hover:text-violet-100"
               aria-hidden="true"

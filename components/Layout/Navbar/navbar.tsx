@@ -1,22 +1,30 @@
 import React, { useState } from 'react';
 import NavBarDropDown from './navbarDropDown/navbarDropDown';
 import Link from 'next/link';
+import { useStore } from 'utils/storage';
+import { useRouter } from 'next/router';
 
 export default function NavBar() {
   const [openmobilemenu, setOpenMobileMenu] = useState(false);
+  const router = useRouter();
+
+  const { clearUser } = useStore((state) => ({
+    clearUser: state.clearUser,
+  }));
 
   const handleMobileMenu = () => {
     setOpenMobileMenu(!openmobilemenu);
   };
-  const handlelogOut = () => {
-    alert('logout');
+  const handleLogOut = () => {
+    clearUser();
+    router.replace('/');
   };
   return (
     <nav className="bg-gray-100  font-semibold py-3 shadow-sm border-b-2 px-12">
       <div className="max-w-8xl mx-auto  ">
         <div className="flex justify-between">
           <div className="flex justify-center">
-            <Link href="/campaigns" legacyBehavior>
+            <Link href="/" legacyBehavior>
               <a className="flex items-center py-2 px-2 text-violet-600 font-unbounded text-3xl">
                 Uba-votes
               </a>
@@ -51,7 +59,7 @@ export default function NavBar() {
           <div className="font-light text-blue-700 flex flex-col">
             <button
               className=" py-3 text-sm hover:bg-blue-400 hover:text-white "
-              onClick={handlelogOut}
+              onClick={handleLogOut}
             >
               Logout
             </button>
