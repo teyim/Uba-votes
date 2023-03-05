@@ -132,7 +132,7 @@ const Signup: NextPage = () => {
   }
 
   return (
-    <div className="w-screen h-screen mx-auto z-50 top-0 fixed flex flex-col justify-center items-center px-5 md:px-0">
+    <div className="w-screen h-screen mx-auto z-10 top-0 fixed flex flex-col justify-center items-center px-5 md:px-0">
       <Toaster />
       <div className="mx-auto mt-5">
         <h1 className="bold text-4xl text-center text-violet-600 font-bold font-unbounded">
