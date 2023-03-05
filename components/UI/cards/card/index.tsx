@@ -8,7 +8,7 @@ function Card({ department, desc, level, name, school, id }: CardProps) {
         <h1 className="text-lg font-semibold font-unbounded text-gray-800">
           {name}
         </h1>
-        <h2 className="text-gray-600 my-1 text-lg">{desc}</h2>
+        <h2 className="text-gray-700 my-1 text-lg font-bold">{desc}</h2>
         <div className="flex my-2">
           <div className="flex mx-1">
             <h3>School:</h3>
