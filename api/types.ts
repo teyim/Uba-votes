@@ -15,18 +15,23 @@ export type Candidate = {
   votes: number;
 };
 
+export type VotingPosition = {
+  _id: string;
+  abbrv: string;
+  name: string;
+  candidates: Candidate[];
+};
+
 export interface ICampaign {
   _id: string;
   name: string;
   desc: string;
   startTime: string;
   endTime: string;
-  votingPositings: string[];
   allowedDepartment: string;
   allowedSchool: string;
   allowedLevel: number;
-  candidates: Candidate[];
-  __v: number;
+  votingPositions: VotingPosition[];
 }
 
 export interface IUser {
