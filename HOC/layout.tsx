@@ -4,22 +4,24 @@ import { useStore } from 'utils/storage';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { IUser } from 'api/types';
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 
 type LayoutProps = {
   children: React.ReactNode;
 };
 function Layout({ children }: LayoutProps) {
   const [userData, setUserData] = useState<IUser | null>();
+
   const { user } = useStore((state) => ({
     user: state.user,
   }));
+
+  const router = useRouter();
 
   useEffect(() => {
     setUserData(user);
   }, []);
 
-  const router = useRouter();
   const showNav =
     router.pathname === '/' ||
     router.pathname === '/signup' ||
@@ -28,18 +30,12 @@ function Layout({ children }: LayoutProps) {
       ? false
       : true;
 
-  const showSplashScreen = router.pathname === '/campaigns' && !userData;
-
   return (
     <>
-      {showSplashScreen ? (
-        <SplashScreen />
-      ) : (
-        <section className="overflow-hidden font-roboto">
-          {showNav && <Navbar />}
-          <section>{children}</section>
-        </section>
-      )}
+      <section className="overflow-hidden font-roboto">
+        {showNav && <Navbar />}
+        <section>{children}</section>
+      </section>
     </>
   );
 }
