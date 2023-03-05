@@ -1,4 +1,4 @@
-type Vote = {
+export type Vote = {
   candidateId: string;
   campaignId: string;
   _id: string;

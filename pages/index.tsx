@@ -4,7 +4,7 @@ import handImage from '@public/images/hand.png';
 import Link from 'next/link';
 import { useStore } from 'utils/storage';
 import { useEffect, useState } from 'react';
-import { IUser } from 'api/types';
+import { IUser } from 'helpers/types';
 
 const Home: NextPage = () => {
   const [userData, setUserData] = useState<IUser | null>(null);

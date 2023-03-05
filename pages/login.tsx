@@ -3,7 +3,7 @@
 import { NextPage } from 'next';
 import { useForm } from 'react-hook-form';
 import { LoginInput } from 'types';
-import { login } from 'helpers/auth';
+import { login } from 'helpers';
 import {
   QueryClient,
   useMutation,
@@ -14,7 +14,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import * as Yup from 'yup';
 import { useRouter } from 'next/router';
-import { IUser } from 'api/types';
+import { IUser } from 'helpers/types';
 import shallow from 'zustand/shallow';
 import { useStore } from '../utils/storage';
 

@@ -17,3 +17,9 @@ export type LoginInput = {
   matricule: string;
   password: string;
 };
+
+export type VoteInput = {
+  voterId: string;
+  candidates: string[];
+  campaignId: string;
+};

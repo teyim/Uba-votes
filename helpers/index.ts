@@ -1,6 +1,11 @@
 import { authApi } from 'api/authApi';
-import { GenericResponse, ICampaign, ILoginResponse, IUser } from 'api/types';
-import { RegisterInput, LoginInput } from 'types';
+import {
+  GenericResponse,
+  ICampaign,
+  ILoginResponse,
+  IUser,
+} from 'helpers/types';
+import { RegisterInput, LoginInput, VoteInput } from 'types';
 
 export const signUp = async (user: RegisterInput) => {
   const response = await authApi.post<GenericResponse>('voter/register', user);
@@ -14,5 +19,10 @@ export const login = async (user: LoginInput) => {
 
 export const getCampaigns = async () => {
   const response = await authApi.get<ICampaign[] | []>('campaigns');
+  return response.data;
+};
+
+export const vote = async (voteData: VoteInput) => {
+  const response = await authApi.post<IUser>('vote', voteData);
   return response.data;
 };

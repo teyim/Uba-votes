@@ -1,6 +1,6 @@
 import { persist, devtools } from 'zustand/middleware';
 import { create } from 'zustand';
-import { IUser } from 'api/types';
+import { IUser } from 'helpers/types';
 
 type UserState = {
   user: IUser | null;
@@ -16,7 +16,9 @@ export const useStore = create<UserState>()(
         setUser: (userData: IUser) => set(() => ({ user: userData })),
         clearUser: () => set(() => ({ user: null })),
       }),
-      persist
+      {
+        name: 'user',
+      }
     )
   )
 );

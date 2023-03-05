@@ -7,7 +7,7 @@ import { useDepartments } from 'hooks/useDepartments';
 import { useForm } from 'react-hook-form';
 import { levels } from 'data/levels';
 import { RegisterInput, SelectOption } from 'types';
-import { signUp } from 'helpers/auth';
+import { signUp } from 'helpers';
 import { useMutation } from '@tanstack/react-query';
 import toast, { Toaster } from 'react-hot-toast';
 import { yupResolver } from '@hookform/resolvers/yup';

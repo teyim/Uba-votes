@@ -3,7 +3,7 @@ import SplashScreen from '@components/Layout/SplashScreen';
 import { useStore } from 'utils/storage';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { IUser } from 'api/types';
+import { IUser } from 'helpers/types';
 import { useEffect, useLayoutEffect } from 'react';
 
 type LayoutProps = {

@@ -7,7 +7,7 @@ import { CgUserlane } from 'react-icons/cg';
 import { useStore } from 'utils/storage';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { IUser } from 'api/types';
+import { IUser } from 'helpers/types';
 
 export default function NavbarDropdown(props: any) {
   const [userData, setUserData] = useState<IUser | null>(null);
