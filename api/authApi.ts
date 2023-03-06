@@ -6,7 +6,7 @@ let token = null;
 if (typeof window !== 'undefined') {
   const item = localStorage.getItem('user');
   if (item) {
-    token = JSON.parse(item).state.user.token;
+    token = JSON.parse(item).state?.user?.token;
   }
 }
 export const authApi = axios.create({
