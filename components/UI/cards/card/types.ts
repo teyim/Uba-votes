@@ -8,4 +8,6 @@ export type CardProps = {
   id: string;
   disabled: boolean;
   hasVoted: Vote | undefined;
+  voteStartTime: string;
+  voteEndTime: string;
 };
