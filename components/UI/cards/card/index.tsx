@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { CardProps } from './types';
+import { useLayoutEffect, useState } from 'react';
+import moment from 'moment';
 
 function Card({
   department,
@@ -10,7 +12,25 @@ function Card({
   id,
   disabled,
   hasVoted,
+  voteStartTime,
+  voteEndTime,
 }: CardProps) {
+  const [hasVotingEnded, setHasVotingEnded] = useState(false);
+  const [hasVotingStarted, setHasVotingStarted] = useState(false);
+
+  const votingEndTimeLeft = moment(voteEndTime).calendar();
+  const votingStartTimeLeft = moment(voteStartTime).calendar();
+  const currentDateAndTime = moment().format();
+
+  useLayoutEffect(() => {
+    if (currentDateAndTime >= voteEndTime) {
+      setHasVotingEnded(true);
+    }
+    if (currentDateAndTime > voteStartTime) {
+      setHasVotingStarted(true);
+    }
+  }, []);
+
   return (
     <div className="p-4 rounded-md shadow-md ring-1 ring-gray-500 my-6">
       <div className="flex flex-col items-center text-center">
@@ -34,10 +54,11 @@ function Card({
         </div>
         <div className="my-1">
           <h4>
-            remaining time:<span className="text-green-600">23min</span>
+            End Time:{' '}
+            <span className="text-green-600">{votingEndTimeLeft}</span>
           </h4>
         </div>
-        {!disabled && !hasVoted && (
+        {!disabled && !hasVoted && hasVotingStarted && !hasVotingEnded && (
           <Link href={`/campaigns/${id}`}>
             <a className="py-2 px-4  hover:border-2 text-black block ring-2 ring-gray-700 hover:bg-violet-600 hover:text-white rounded-md text-lg font-semibold mx-auto my-4 disabled:bg-gray-500 disabled:text-black disabled:ring-0 disabled:border-0">
               View Campaign
@@ -49,10 +70,22 @@ function Card({
             You are not Eligible to vote in this Campaign
           </div>
         )}
-        {hasVoted && (
+        {hasVoted && !hasVotingEnded && (
           <div className="text-violet-600 font-medium">
             You have already casted vote for this campaign, view results after
             campaign ends
+          </div>
+        )}
+        {!disabled && hasVotingEnded && (
+          <div className="text-violet-600 font-medium">
+            Campaign has ended
+            <h1 className="underline text-black">View results</h1>
+          </div>
+        )}
+        {!disabled && !hasVotingStarted && (
+          <div className="text-violet-600 font-medium">
+            Voting for this campaign will start{' '}
+            <span className="font-bold underline">{votingStartTimeLeft}</span>
           </div>
         )}
       </div>
