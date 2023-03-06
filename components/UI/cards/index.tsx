@@ -26,12 +26,14 @@ function Cards({ data }: CardsProps) {
           name={campaign.name}
           disabled={
             campaign.allowedSchool !== user?.school ||
-            campaign.allowedDepartment !== user.department ||
-            campaign.allowedLevel !== user.level
+            campaign.allowedDepartment !== user?.department ||
+            campaign.allowedLevel !== user?.level
           }
-          hasVoted={user?.votes.find(
+          hasVoted={user?.votes?.find(
             (vote) => vote.campaignId === campaign._id
           )}
+          voteEndTime={campaign.endTime}
+          voteStartTime={campaign.startTime}
         />
       ))}
     </>
