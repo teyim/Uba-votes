@@ -1,5 +1,6 @@
 import { authApi } from 'api/authApi';
 import {
+  campaignResult,
   GenericResponse,
   ICampaign,
   ILoginResponse,
@@ -24,5 +25,13 @@ export const getCampaigns = async () => {
 
 export const vote = async (voteData: VoteInput) => {
   const response = await authApi.post<IUser>('vote', voteData);
+  return response.data;
+};
+
+export const getCampaignResults = async (campaignId: string) => {
+  console.log(campaignId);
+  const response = await authApi.get<campaignResult[]>(
+    `campaigns/${campaignId}/result`
+  );
   return response.data;
 };
