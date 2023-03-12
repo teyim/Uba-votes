@@ -79,7 +79,9 @@ function Card({
         {!disabled && hasVotingEnded && (
           <div className="text-violet-600 font-medium">
             Campaign has ended
-            <h1 className="underline text-black">View results</h1>
+            <Link passHref href={`/results/${id}`}>
+            <a className="underline text-black block my-1">View results</a>
+            </Link>
           </div>
         )}
         {!disabled && !hasVotingStarted && (
