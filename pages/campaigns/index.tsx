@@ -6,8 +6,11 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const Campaigns: NextPage = () => {
   const { data, isLoading, error, isError } = useCampaignQuery();
-  if (isError) {
+  if (isError && !error?.message) {
     toast.error(error?.response?.data);
+  }
+  if (error?.message && isError) {
+    toast.error(error?.message)
   }
   return (
     <>
@@ -16,15 +19,21 @@ const Campaigns: NextPage = () => {
         <h2 className="text-violet-500 font-unbounded text-2xl font-semibold">
           Ongoing Campaigns
         </h2>
-        <div className="md:w-1/2 my-10">
-          {isLoading ? (
+        <div className="md:w-1/2 my-10 flex flex-col">
+          {isLoading &&
             <ComponentState
               currentComponent="Campaigns"
               isLoading={isLoading}
             />
-          ) : (
-            <Cards data={data} />
-          )}
+          }
+          {isError &&
+            <ComponentState
+              currentComponent="Campaigns"
+              isError={isError}
+            />
+          }
+          {!isLoading && !isError && <Cards data={data} />}
+
         </div>
       </section>
     </>
