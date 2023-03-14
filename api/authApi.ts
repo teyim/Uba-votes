@@ -15,3 +15,4 @@ export const authApi = axios.create({
 
 authApi.defaults.headers.common['Content-Type'] = 'application/json';
 authApi.defaults.headers.post['Authorization'] = token;
+authApi.defaults.headers.get['Authorization'] = token;
