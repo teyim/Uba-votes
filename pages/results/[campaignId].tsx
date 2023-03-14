@@ -6,7 +6,8 @@ import Image from 'next/image';
 import { campaignResult } from 'helpers/types';
 import { useLayoutEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-
+import { BiArrowBack } from 'react-icons/bi';
+import Link from 'next/link';
 const Results: NextPage = () => {
   const router = useRouter();
 
@@ -24,6 +25,12 @@ const Results: NextPage = () => {
     <>
       <Toaster />
       <section className="my-5 px-8 py-4 flex flex-col items-center ">
+        <Link passHref href='/campaigns'>
+          <a className='p-1 px-3 rounded-md border-2 border-gray-700 flex justify-center align-middle my-4 hover:bg-gray-700 hover:text-white'>
+            <BiArrowBack className='my-auto mx-2' />
+            Back
+          </a>
+        </Link>
         <h2 className="text-violet-500 font-unbounded text-2xl font-semibold">
           Campaign Results
         </h2>
