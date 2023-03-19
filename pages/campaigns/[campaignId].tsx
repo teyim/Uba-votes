@@ -32,6 +32,7 @@ function SingleCampaign() {
     {
       onSuccess(data) {
         setUser(data);
+        console.log(data)
       },
     }
   );
@@ -52,8 +53,6 @@ function SingleCampaign() {
     };
     mutate(voteData, {
       onSuccess() {
-        toast.success('Vote Succesfull');
-        console.log(user);
         if (user?.votes) {
           router.replace('/campaigns');
         }
@@ -66,6 +65,7 @@ function SingleCampaign() {
         } else {
           toast.error(error.response.data);
         }
+        console.log(error)
       },
     });
   }
@@ -74,8 +74,9 @@ function SingleCampaign() {
     <ComponentState currentComponent="Campaign" isLoading={isLoading} />
   ) : (
     <>
-      <Toaster />
+
       <section className="my-4 md:mx-6 flex justify-center">
+        <Toaster />
         <div className="w-10/12 md:w-1/2 text-center">
           <h1 className="font-unbounded text-2xl text-violet-600 font-bold my-1">
             {campaign?.name}
@@ -85,19 +86,19 @@ function SingleCampaign() {
           </h1>
           <div className="my-2">
             <form onSubmit={handleSubmit(submitHandler)}>
-              {campaign?.votingPositions?.map((votingPostion) => (
-                <div key={votingPostion._id}>
+              {campaign?.votingPositions?.map((votingPosition) => (
+                <div key={votingPosition._id}>
                   <h1 className="mt-4 text-xl text-violet-600 font-bold">
-                    {votingPostion.name}
+                    {votingPosition.name}
                   </h1>
                   <div className="md:grid md:grid-cols-3 md:gap-3 w-full max-w-screen-sm  ">
-                    {votingPostion.candidates.map((candidate) => (
+                    {votingPosition.candidates.map((candidate) => (
                       <div className="my-2" key={candidate._id}>
                         <input
-                          {...register(votingPostion.name)}
+                          {...register(votingPosition.name)}
                           className="w-4 h-4 text-violet-600 bg-gray-100 border-gray-400 focus:ring-violet-500 focus:ring-0 my-2"
                           type="radio"
-                          name={votingPostion.name}
+                          name={votingPosition.name}
                           value={candidate._id}
                           checked
                         />
@@ -122,11 +123,10 @@ function SingleCampaign() {
                           <span>
                             votes
                             <span
-                              className={`${
-                                candidate.votes === 0
-                                  ? 'text-red-500'
-                                  : 'text-green-600'
-                              } mx-2`}
+                              className={`${candidate.votes === 0
+                                ? 'text-red-500'
+                                : 'text-green-600'
+                                } mx-2`}
                             >
                               {candidate.votes}
                             </span>

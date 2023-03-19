@@ -24,9 +24,10 @@ function Layout({ children }: LayoutProps) {
 
   const showNav =
     router.pathname === '/' ||
-    router.pathname === '/signup' ||
-    router.pathname === '/login' ||
-    router.pathname === '/admin'
+      router.pathname === '/signup' ||
+      router.pathname === '/login' ||
+      router.pathname === '/admin' ||
+      router.pathname === '/admin/dashboard'
       ? false
       : true;
 
