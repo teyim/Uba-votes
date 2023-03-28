@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useLayoutEffect } from 'react';
 
 type CardsProps = {
-  data: ICampaign[] | [] | undefined;
+  data: ICampaign[] | [];
 };
 
 function Cards({ data }: CardsProps) {
