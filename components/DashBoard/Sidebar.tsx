@@ -1,3 +1,4 @@
+
 import { Side } from '@tanstack/react-query-devtools/build/lib/utils';
 import React, { useEffect, useRef, useState } from 'react';
 import { AiFillHome } from "react-icons/ai"
@@ -27,7 +28,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, toggleTabs }: SidebarProps) {
 
     // close on click outside
     useEffect(() => {
-        const clickHandler = ({ target }) => {
+        const clickHandler = ({ target }): void => {
             if (!sidebar?.current || !trigger?.current) return;
             if (!sidebarOpen || sidebar?.current?.contains(target) || trigger?.current?.contains(target)) return;
             setSidebarOpen(false);

@@ -18,8 +18,8 @@ export const login = async (user: LoginInput) => {
   return response.data;
 };
 
-export const getCampaigns = async () => {
-  const response = await authApi.get<ICampaign[] | []>('campaigns');
+export const getCampaigns = async (userId: string) => {
+  const response = await authApi.get<ICampaign[] | []>(`campaigns/${userId}`);
   return response.data;
 };
 

@@ -16,6 +16,7 @@ function Cards({ data }: CardsProps) {
   return (
     <>
       {data?.map((campaign) => (
+
         <Card
           id={campaign._id}
           key={campaign._id}
