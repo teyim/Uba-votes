@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { BsChevronDown } from 'react-icons/bs';
-import { BiUserCircle } from 'react-icons/bi';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { CgUserlane } from 'react-icons/cg';
 import { useStore } from 'utils/storage';
@@ -22,7 +22,7 @@ export default function NavbarDropdown(props: any) {
 
   useEffect(() => {
     setUserData(user);
-  }, []);
+  }, [user]);
 
   const handleLogOut = () => {
     clearUser();

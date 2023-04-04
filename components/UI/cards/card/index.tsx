@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Link from 'next/link';
 import { CardProps } from './types';
 import { useLayoutEffect, useState } from 'react';
@@ -80,7 +81,7 @@ function Card({
           <div className="text-violet-600 font-medium">
             Campaign has ended
             <Link passHref href={`/results/${id}`}>
-            <a className="underline text-black block my-1">View results</a>
+              <a className="underline text-black block my-1">View results</a>
             </Link>
           </div>
         )}

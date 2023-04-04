@@ -1,8 +1,6 @@
 import { ICampaign } from 'helpers/types';
 import Card from './card';
 import { useStore } from 'utils/storage';
-import { useState } from 'react';
-import { useLayoutEffect } from 'react';
 
 type CardsProps = {
   data: ICampaign[] | [];
@@ -16,7 +14,6 @@ function Cards({ data }: CardsProps) {
   return (
     <>
       {data?.map((campaign) => (
-
         <Card
           id={campaign._id}
           key={campaign._id}

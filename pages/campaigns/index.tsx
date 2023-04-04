@@ -15,7 +15,7 @@ const Campaigns: NextPage = () => {
   );
 
   if (isError && !error?.message) {
-    toast.error(error?.response?.data);
+    toast.error(error?.response.data);
   }
   if (error?.message && isError) {
     toast.error(error?.message);

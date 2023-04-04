@@ -1,4 +1,3 @@
-import Campaigns from 'pages/campaigns';
 import React from 'react';
 
 type ComponentStateProps = {

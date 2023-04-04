@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useRouter } from 'next/router';
 import { ICampaign } from 'helpers/types';
 import { useCampaignQuery } from 'hooks';
@@ -13,26 +14,25 @@ import toast, { Toaster } from 'react-hot-toast';
 function SingleCampaign() {
   const router = useRouter();
   const id = router.query.campaignId;
+  const { setUser, user } = useStore((state) => ({
+    setUser: state.setUser,
+    user: state.user,
+  }));
 
   const {
     data,
     isLoading: campaignLoading,
     error,
     isError,
-  } = useCampaignQuery();
+  } = useCampaignQuery(user?._id as string);
   const campaign = data?.find((campaign: ICampaign) => campaign._id === id);
-
-  const { setUser, user } = useStore((state) => ({
-    setUser: state.setUser,
-    user: state.user,
-  }));
 
   const { mutate, isLoading } = useMutation(
     (voteData: VoteInput) => vote(voteData),
     {
       onSuccess(data) {
         setUser(data);
-        console.log(data)
+        console.log(data);
       },
     }
   );
@@ -65,7 +65,7 @@ function SingleCampaign() {
         } else {
           toast.error(error.response.data);
         }
-        console.log(error)
+        console.log(error);
       },
     });
   }
@@ -74,7 +74,6 @@ function SingleCampaign() {
     <ComponentState currentComponent="Campaign" isLoading={isLoading} />
   ) : (
     <>
-
       <section className="my-4 md:mx-6 flex justify-center">
         <Toaster />
         <div className="w-10/12 md:w-1/2 text-center">
@@ -123,10 +122,11 @@ function SingleCampaign() {
                           <span>
                             votes
                             <span
-                              className={`${candidate.votes === 0
-                                ? 'text-red-500'
-                                : 'text-green-600'
-                                } mx-2`}
+                              className={`${
+                                candidate.votes === 0
+                                  ? 'text-red-500'
+                                  : 'text-green-600'
+                              } mx-2`}
                             >
                               {candidate.votes}
                             </span>
