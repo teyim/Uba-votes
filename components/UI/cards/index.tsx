@@ -1,13 +1,13 @@
 import { ICampaign } from 'helpers/types';
 import Card from './card';
-import { useStore } from 'utils/storage';
+import { useUserStore } from 'utils/storage';
 
 type CardsProps = {
   data: ICampaign[] | [];
 };
 
 function Cards({ data }: CardsProps) {
-  const { user } = useStore((state) => ({
+  const { user } = useUserStore((state) => ({
     user: state.user,
   }));
 

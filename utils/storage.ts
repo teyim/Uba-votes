@@ -8,7 +8,13 @@ type UserState = {
   clearUser: () => void;
 };
 
-export const useStore = create<UserState>()(
+type AdminState = {
+  adminToken: string | null;
+  setAdminToken: (token: string) => void;
+  clearAdminToken: () => void;
+};
+
+export const useUserStore = create<UserState>()(
   devtools(
     persist(
       (set) => ({
@@ -18,6 +24,21 @@ export const useStore = create<UserState>()(
       }),
       {
         name: 'user',
+      }
+    )
+  )
+);
+
+export const useAdminStore = create<AdminState>()(
+  devtools(
+    persist(
+      (set) => ({
+        adminToken: null,
+        setAdminToken: (token: string) => set(() => ({ adminToken: token })),
+        clearAdminToken: () => set(() => ({ adminToken: null })),
+      }),
+      {
+        name: 'adminToken',
       }
     )
   )

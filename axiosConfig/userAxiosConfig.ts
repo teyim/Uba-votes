@@ -1,7 +1,6 @@
 import axios from 'axios';
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-
 let token = null;
 
 if (typeof window !== 'undefined') {
@@ -10,10 +9,10 @@ if (typeof window !== 'undefined') {
     token = JSON.parse(item).state?.user?.token;
   }
 }
-export const authApi = axios.create({
+export const userAxiosConfig = axios.create({
   baseURL: BASE_URL,
 });
 
-authApi.defaults.headers.common['Content-Type'] = 'application/json';
-authApi.defaults.headers.post['Authorization'] = token;
-authApi.defaults.headers.get['Authorization'] = token;
+userAxiosConfig.defaults.headers.common['Content-Type'] = 'application/json';
+userAxiosConfig.defaults.headers.post['Authorization'] = token;
+userAxiosConfig.defaults.headers.get['Authorization'] = token;

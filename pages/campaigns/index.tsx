@@ -3,10 +3,10 @@ import Cards from '@components/UI/cards';
 import { useCampaignQuery } from 'hooks';
 import ComponentState from '@components/Layout/componentState';
 import toast, { Toaster } from 'react-hot-toast';
-import { useStore } from 'utils/storage';
+import { useUserStore } from 'utils/storage';
 
 const Campaigns: NextPage = () => {
-  const { user } = useStore((state) => ({
+  const { user } = useUserStore((state) => ({
     user: state.user,
   }));
 

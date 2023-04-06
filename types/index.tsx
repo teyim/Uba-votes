@@ -13,8 +13,13 @@ export type RegisterInput = {
   password: string;
 };
 
-export type LoginInput = {
+export type userLoginInput = {
   matricule: string;
+  password: string;
+};
+
+export type adminLoginInput = {
+  username: string;
   password: string;
 };
 

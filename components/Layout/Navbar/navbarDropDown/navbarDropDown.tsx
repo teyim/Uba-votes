@@ -4,7 +4,7 @@ import { Fragment, useState } from 'react';
 import { BsChevronDown } from 'react-icons/bs';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { CgUserlane } from 'react-icons/cg';
-import { useStore } from 'utils/storage';
+import { useUserStore } from 'utils/storage';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { IUser } from 'helpers/types';
@@ -15,7 +15,7 @@ export default function NavbarDropdown(props: any) {
   const { customStyle } = props;
   const router = useRouter();
 
-  const { user, clearUser } = useStore((state) => ({
+  const { user, clearUser } = useUserStore((state) => ({
     user: state.user,
     clearUser: state.clearUser,
   }));

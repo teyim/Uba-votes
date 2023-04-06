@@ -6,15 +6,15 @@ import ComponentState from '@components/Layout/componentState';
 import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
-import { vote } from 'helpers';
-import { useStore } from 'utils/storage';
+import { vote } from 'helpers/userHelpers';
+import { useUserStore } from 'utils/storage';
 import { VoteInput } from 'types';
 import toast, { Toaster } from 'react-hot-toast';
 
 function SingleCampaign() {
   const router = useRouter();
   const id = router.query.campaignId;
-  const { setUser, user } = useStore((state) => ({
+  const { setUser, user } = useUserStore((state) => ({
     setUser: state.setUser,
     user: state.user,
   }));

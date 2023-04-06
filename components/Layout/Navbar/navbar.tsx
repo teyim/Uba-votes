@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import NavBarDropDown from './navbarDropDown/navbarDropDown';
 import Link from 'next/link';
-import { useStore } from 'utils/storage';
+import { useUserStore } from 'utils/storage';
 import { useRouter } from 'next/router';
 
 export default function NavBar() {
   const [openmobilemenu, setOpenMobileMenu] = useState(false);
   const router = useRouter();
 
-  const { clearUser } = useStore((state) => ({
+  const { clearUser } = useUserStore((state) => ({
     clearUser: state.clearUser,
   }));
 

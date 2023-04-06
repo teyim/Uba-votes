@@ -5,7 +5,7 @@ import Layout from 'HOC/layout';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useEffect } from 'react';
-import { useStore } from 'utils/storage';
+import { useUserStore } from 'utils/storage';
 import { useRouter } from 'next/router';
 
 const queryClient = new QueryClient({
@@ -18,7 +18,7 @@ const queryClient = new QueryClient({
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { user } = useStore((state) => ({
+  const { user } = useUserStore((state) => ({
     user: state.user,
   }));
 

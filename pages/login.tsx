@@ -2,8 +2,8 @@
 
 import { NextPage } from 'next';
 import { useForm } from 'react-hook-form';
-import { LoginInput } from 'types';
-import { login } from 'helpers';
+import { userLoginInput } from 'types';
+import { login } from 'helpers/userHelpers';
 import {
   QueryClient,
   useMutation,
@@ -16,7 +16,7 @@ import * as Yup from 'yup';
 import { useRouter } from 'next/router';
 import { IUser } from 'helpers/types';
 import shallow from 'zustand/shallow';
-import { useStore } from '../utils/storage';
+import { useUserStore } from '../utils/storage';
 
 const Login: NextPage = () => {
   const formSchema = Yup.object().shape({
@@ -37,7 +37,7 @@ const Login: NextPage = () => {
   const queryClient = useQueryClient();
 
   const router = useRouter();
-  const { setUser, user } = useStore((state) => ({
+  const { setUser, user } = useUserStore((state) => ({
     setUser: state.setUser,
     user: state.user,
   }));
@@ -50,7 +50,7 @@ const Login: NextPage = () => {
   } = useForm(formOptions);
 
   const { mutate, isLoading } = useMutation(
-    (userData: LoginInput) => login(userData),
+    (userData: userLoginInput) => login(userData),
     {
       onSuccess(data) {
         queryClient.setQueryData(['userData'], data);

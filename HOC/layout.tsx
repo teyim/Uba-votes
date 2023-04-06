@@ -1,6 +1,6 @@
 import Navbar from '@components/Layout/Navbar/navbar';
 import SplashScreen from '@components/Layout/SplashScreen';
-import { useStore } from 'utils/storage';
+import { useUserStore } from 'utils/storage';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { IUser } from 'helpers/types';
@@ -12,7 +12,7 @@ type LayoutProps = {
 function Layout({ children }: LayoutProps) {
   const [userData, setUserData] = useState<IUser | null>();
 
-  const { user } = useStore((state) => ({
+  const { user } = useUserStore((state) => ({
     user: state.user,
   }));
 
@@ -24,10 +24,10 @@ function Layout({ children }: LayoutProps) {
 
   const showNav =
     router.pathname === '/' ||
-      router.pathname === '/signup' ||
-      router.pathname === '/login' ||
-      router.pathname === '/admin' ||
-      router.pathname === '/admin/dashboard'
+    router.pathname === '/signup' ||
+    router.pathname === '/login' ||
+    router.pathname === '/admin' ||
+    router.pathname === '/admin/dashboard'
       ? false
       : true;
 
