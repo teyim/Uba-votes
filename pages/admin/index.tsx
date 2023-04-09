@@ -13,7 +13,7 @@ import { useAdminStore } from 'utils/storage';
 
 const Admin: NextPage = () => {
   const formSchema = Yup.object().shape({
-    email: Yup.string().trim().required('Your email is required'),
+    username: Yup.string().trim().required('Your username is required'),
     password: Yup.string().trim().required('Password is mendatory'),
   });
   const formOptions = { resolver: yupResolver(formSchema) };
@@ -24,6 +24,7 @@ const Admin: NextPage = () => {
     setAdminToken: state.setAdminToken,
     adminToken: state.adminToken,
   }));
+
   const {
     register,
     handleSubmit,
@@ -47,7 +48,7 @@ const Admin: NextPage = () => {
         const data = queryClient.getQueryData(['adminToken']);
         setAdminToken(data as string);
         if (data) {
-          router.push('/dashboard');
+          router.push('admin/dashboard');
         }
       },
       onError(error: any) {
@@ -57,6 +58,7 @@ const Admin: NextPage = () => {
           );
         } else {
           toast.error(error.response.data);
+          console.error(error)
         }
       },
     });
@@ -67,10 +69,10 @@ const Admin: NextPage = () => {
       <Toaster />
       <div className="mx-auto mt-5">
         <h1 className="bold text-4xl text-center text-violet-600 font-bold font-unbounded">
-          Login
+          Admin Login
         </h1>
         <h2 className="text-lg text-center my-1 text-slate-600">
-          Please enter login credentials
+          Please enter Admin login credentials
         </h2>
       </div>
       <div className="relative w-full md:w-4/12 flex flex-col ring-1 rounded-md shadow-sm ring-gray-600 py-8 px-6 ">
