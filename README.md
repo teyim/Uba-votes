@@ -1,5 +1,7 @@
 # School E-Voting Platform with Next.js, TypeScript and TailwindCSS
 
+![website image](/ubavote.png)
+
 This is a GitHub repository for a school e-voting platform built with Next.js, TypeScript and TailwindCSS. The platform aims to provide a secure and reliable online voting platform that can be used by schools for student-centric activities such as student leader elections, class representative voting and many more.
 
 ## Prerequisites
