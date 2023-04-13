@@ -36,7 +36,7 @@ function Header({ sidebarOpen, setSidebarOpen }: HeaderProps) {
 
                         {/*  Divider */}
                         <hr className="w-px h-6 bg-gray-200 mx-3" />
-                        <h2 className='font-roboto text-lg font-medium text-gray-700'>hello world</h2>
+                        <h2 className='font-roboto text-lg font-medium text-gray-700'>Admin</h2>
 
                     </div>
 

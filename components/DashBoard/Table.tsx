@@ -1,8 +1,12 @@
 import React from 'react'
 
-function Table(tableHeading: string) {
+type TableProps={
+    tableHeading:string;
+}
+
+function Table({tableHeading}:TableProps) {
     return (
-        <div className="col-span-full xl:col-span-8 bg-white shadow-lg rounded-sm border border-gray-200 overflow-x-scroll">
+        <div className="col-span-full xl:col-span-8 bg-white shadow-lg rounded-sm border border-gray-200 overflow-x-scroll mt-8">
             {tableHeading && <header className="px-5 py-4 border-b border-gray-100">
                 <h2 className="font-semibold text-gray-800">{tableHeading}</h2>
             </header>}
