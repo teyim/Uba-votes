@@ -13,28 +13,25 @@ function Table({tableHeading}:TableProps) {
             <div className="p-3">
 
                 {/* Table */}
-                <div className="overflow-x-auto">
-                    <table className="table-auto w-full">
+                <div className="overflow-x-auto border-separate">
+                    <table className="table-auto w-full bborder-spacing-y-10">
                         {/* Table header */}
                         <thead className="text-xs uppercase text-gray-400 bg-gray-50 rounded-sm">
                             <tr>
                                 <th className="p-2">
-                                    <div className="font-semibold text-left">Agency</div>
+                                    <div className="font-semibold text-left">Name</div>
                                 </th>
                                 <th className="p-2">
-                                    <div className="font-semibold text-center">From</div>
+                                    <div className="font-semibold text-center">Candidates</div>
                                 </th>
                                 <th className="p-2">
-                                    <div className="font-semibold text-center">To</div>
+                                    <div className="font-semibold text-center">Votes</div>
                                 </th>
                                 <th className="p-2">
-                                    <div className="font-semibold text-center">Price</div>
+                                    <div className="font-semibold text-center">Start time</div>
                                 </th>
                                 <th className="p-2">
-                                    <div className="font-semibold text-center">Seats</div>
-                                </th>
-                                <th className="p-2">
-                                    <div className="font-semibold text-center">Travellers</div>
+                                    <div className="font-semibold text-center">End time</div>
                                 </th>
                             </tr>
                         </thead>
@@ -58,93 +55,14 @@ function Table({tableHeading}:TableProps) {
                                     <div className="text-center text-light-blue-500">4.7%</div>
                                 </td>
                                 <td className="p-2">
-                                    <div className="text-center text-light-blue-500">3.9%</div>
+                                    <div className="text-center text-blue-500 hover:underline cursor-pointer">Edit</div>
+                                </td>
+                                <td className="p-2">
+                                    <div className="text-center text-red-500 hover:underline cursor-pointer">Delete</div>
                                 </td>
                             </tr>
                             {/* Row */}
-                            <tr>
-                                <td className="p-2">
-                                    <div className="text-gray-800">Github.com</div>
-                                </td>
-                                <td className="p-2">
-                                    <div className="text-center">2.2K</div>
-                                </td>
-                                <td className="p-2">
-                                    <div className="text-center text-green-500">$3,426</div>
-                                </td>
-                                <td className="p-2">
-                                    <div className="text-center">249</div>
-                                </td>
-                                <td className="p-2">
-                                    <div className="text-center text-light-blue-500">4.4%</div>
-                                </td>
-                                <td className="p-2">
-                                    <div className="text-center text-light-blue-500">3.9%</div>
-                                </td>
-                            </tr>
-                            {/* Row */}
-                            <tr>
-                                <td className="p-2">
-                                    <div className="text-gray-800">Github.com</div>
-                                </td>
-                                <td className="p-2">
-                                    <div className="text-center">2.0K</div>
-                                </td>
-                                <td className="p-2">
-                                    <div className="text-center text-green-500">$2,444</div>
-                                </td>
-                                <td className="p-2">
-                                    <div className="text-center">224</div>
-                                </td>
-                                <td className="p-2">
-                                    <div className="text-center text-light-blue-500">4.2%</div>
-                                </td>
-                                <td className="p-2">
-                                    <div className="text-center text-light-blue-500">3.9%</div>
-                                </td>
-                            </tr>
-                            {/* Row */}
-                            <tr>
-                                <td className="p-2">
-                                    <div className="text-gray-800">Github.com</div>
-                                </td>
-                                <td className="p-2">
-                                    <div className="text-center">1.9K</div>
-                                </td>
-                                <td className="p-2">
-                                    <div className="text-center text-green-500">$2,236</div>
-                                </td>
-                                <td className="p-2">
-                                    <div className="text-center">220</div>
-                                </td>
-                                <td className="p-2">
-                                    <div className="text-center text-light-blue-500">4.2%</div>
-                                </td>
-                                <td className="p-2">
-                                    <div className="text-center text-light-blue-500">3.9%</div>
-                                </td>
-                            </tr>
-                            {/* Row */}
-                            <tr>
-                                <td className="p-2">
-                                    <div className="text-gray-800">Github.com</div>
-                                </td>
-                                <td className="p-2">
-                                    <div className="text-center">1.7K</div>
-                                </td>
-                                <td className="p-2">
-                                    <div className="text-center text-green-500">$2,034</div>
-                                </td>
-                                <td className="p-2">
-                                    <div className="text-center">204</div>
-                                </td>
-                                <td className="p-2">
-                                    <div className="text-center text-light-blue-500">3.9%</div>
-                                </td>
-                                <td className="p-2">
-                                    <div className="text-center text-light-blue-500">3.9%</div>
-                                </td>
-                            </tr>
+                           
                         </tbody>
                     </table>
 

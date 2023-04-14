@@ -1,7 +1,7 @@
 import { Side } from '@tanstack/react-query-devtools/build/lib/utils';
 import React, { useEffect, useRef, useState } from 'react';
 import { AiFillHome } from 'react-icons/ai';
-import { FaUserCircle } from 'react-icons/fa';
+import { MdCampaign } from 'react-icons/md';
 import { RiRoadMapFill, RiLogoutCircleRFill } from 'react-icons/ri';
 
 type SidebarProps = {
@@ -16,7 +16,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, toggleTabs }: SidebarProps) {
 
   //change to a single state object
   const [showHome, setShowHome] = useState(true);
-  const [showprofilePage, setshowprofilePage] = useState(false);
+  const [showCampaignsPage, setshowCampaignsPage] = useState(false);
   const [showTripsPage, setshowTripsPage] = useState(false);
 
   const handleLogOut = () => {
@@ -38,19 +38,19 @@ function Sidebar({ sidebarOpen, setSidebarOpen, toggleTabs }: SidebarProps) {
     //refactor this code
     if (pageName === 'home') {
       setshowTripsPage(false);
-      setshowprofilePage(false);
+      setshowCampaignsPage(false);
       setShowHome(true);
       toggleTabs(pageName);
     }
-    if (pageName === 'profilePage') {
+    if (pageName === 'campaigns') {
       setshowTripsPage(false);
       setShowHome(false);
-      setshowprofilePage(true);
+      setshowCampaignsPage(true);
       toggleTabs(pageName);
     }
     if (pageName === 'tripsPage') {
       setShowHome(false);
-      setshowprofilePage(false);
+      setshowCampaignsPage(false);
       setshowTripsPage(true);
       toggleTabs(pageName);
     }
@@ -123,22 +123,22 @@ function Sidebar({ sidebarOpen, setSidebarOpen, toggleTabs }: SidebarProps) {
             </li>
             <li
               className={`px-3 py-3 rounded-sm mb-0.5 last:mb-0 cursor-pointer ${
-                showprofilePage && 'bg-gray-900'
+                showCampaignsPage && 'bg-gray-900'
               }`}
-              onClick={() => togglePages('profilePage')}
+              onClick={() => togglePages('campaigns')}
             >
               <div
                 className={`block text-gray-200 hover:text-white transition duration-150 ${
-                  showprofilePage && 'hover:text-gray-200'
+                  showCampaignsPage && 'hover:text-gray-200'
                 }`}
               >
                 <div className="flex flex-grow">
-                  <FaUserCircle
+                  <MdCampaign
                     className={`flex-shrink-0 w-6 h-6 mr-2  text-gray-400 ${
-                      showprofilePage && 'text-indigo-600'
+                      showCampaignsPage && 'text-indigo-600'
                     }`}
                   />
-                  <span className="text-sm font-medium">Profile</span>
+                  <span className="text-sm font-medium">Campaigns</span>
                 </div>
               </div>
             </li>

@@ -2,30 +2,30 @@ import Header from '@components/DashBoard/Header';
 import Sidebar from '@components/DashBoard/Sidebar';
 import Home from '@components/DashBoard/Tabs/Home';
 import React, { useState } from 'react';
-import Profile from '@components/DashBoard/Tabs/Profile';
 import Trips from '@components/DashBoard/Tabs/Trips';
+import Campaigns from '@components/DashBoard/Tabs/Campaigns';
 
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showHome, setShowHome] = useState(true);
-  const [showprofilePage, setshowprofilePage] = useState(false);
+  const [showCampaignsPage, setShowCampaignsPage] = useState(false);
   const [showTripsPage, setshowTripsPage] = useState(false);
 
   const togglePages = (pageName: string) => {
     //refactor this code
     if (pageName === 'home' && showHome !== true) {
       setshowTripsPage(false);
-      setshowprofilePage(false);
+      setShowCampaignsPage(false);
       setShowHome(!showHome);
     }
-    if (pageName === 'profilePage' && showprofilePage !== true) {
+    if (pageName === 'campaigns' && showCampaignsPage !== true) {
       setshowTripsPage(false);
       setShowHome(false);
-      setshowprofilePage(!showprofilePage);
+      setShowCampaignsPage(!showCampaignsPage);
     }
     if (pageName === 'tripsPage' && showTripsPage !== true) {
       setShowHome(false);
-      setshowprofilePage(false);
+      setShowCampaignsPage(false);
       setshowTripsPage(!showTripsPage);
     }
   };
@@ -46,7 +46,7 @@ const Dashboard = () => {
 
           <main>
             {showHome && <Home></Home>}
-            {showprofilePage && <Profile />}
+            {showCampaignsPage&& <Campaigns />}
             {showTripsPage && <Trips />}
           </main>
         </div>
