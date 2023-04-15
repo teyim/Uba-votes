@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useRouter } from 'next/router';
 import { ICampaign } from 'helpers/types';
-import { useCampaignQuery } from 'hooks';
+import { useCampaignQuery } from 'hooks/userHooks';
 import ComponentState from '@components/Layout/componentState';
 import Image from 'next/image';
 import { useForm } from 'react-hook-form';

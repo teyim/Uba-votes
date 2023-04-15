@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import Cards from '@components/UI/cards';
-import { useCampaignQuery } from 'hooks';
+import { useCampaignQuery } from 'hooks/userHooks';
 import ComponentState from '@components/Layout/componentState';
 import toast, { Toaster } from 'react-hot-toast';
 import { useUserStore } from 'utils/storage';
