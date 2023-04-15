@@ -2,7 +2,7 @@
 import Header from '@components/DashBoard/Header';
 import Sidebar from '@components/DashBoard/Sidebar';
 import Home from '@components/DashBoard/Tabs/Home';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Trips from '@components/DashBoard/Tabs/Trips';
 import Campaigns from '@components/DashBoard/Tabs/Campaigns';
 import { useAllCampaignsQuery } from 'hooks/adminHooks';
@@ -28,6 +28,21 @@ const Dashboard = () => {
   // if (error?.message && isError) {
   //   toast.error(error?.message);
   // }
+
+  //
+  let totalCampaigns = 0;
+  let totalCandidates = 0;
+  let totalVotes = 0;
+
+  data?.forEach((campaign) => {
+    totalCampaigns++;
+    campaign.votingPositions.forEach((votingPosition) => {
+      totalCandidates += votingPosition.candidates.length;
+      votingPosition.candidates.forEach((candidate) => {
+        totalVotes += candidate.votes;
+      });
+    });
+  });
 
   function getCampaignData(campaigns: ICampaign[] | []) {
     if (campaigns) {
@@ -90,7 +105,13 @@ const Dashboard = () => {
             <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
             <main>
-              {showHome && <Home></Home>}
+              {showHome && (
+                <Home
+                  totalCampaigns={totalCampaigns}
+                  totalCandidates={totalCandidates}
+                  totalVotes={totalVotes}
+                ></Home>
+              )}
               {showCampaignsPage && (
                 <Campaigns data={() => getCampaignData(data!)} />
               )}

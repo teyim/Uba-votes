@@ -53,7 +53,7 @@ function Table({ tableHeading, data }: TableProps) {
                   </td>
                   <td className="p-2">
                     <div className="text-center text-green-500">
-                      {campaign.numVotes}
+                      {campaign.numVotes / 2}
                     </div>
                   </td>
                   <td className="p-2">
