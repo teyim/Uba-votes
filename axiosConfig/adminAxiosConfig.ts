@@ -5,6 +5,10 @@ let token = null;
 
 if (typeof window !== 'undefined') {
   token = localStorage.getItem('adminToken');
+  if (token) {
+    token = JSON.parse(token).state?.adminToken?.token;
+  }
+  console.log(token);
 }
 export const adminAxiosConfig = axios.create({
   baseURL: BASE_URL,

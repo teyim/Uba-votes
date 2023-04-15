@@ -28,3 +28,12 @@ export type VoteInput = {
   candidates: string[];
   campaignId: string;
 };
+
+export type FilteredCampaign = {
+  name: string;
+  id: string;
+  startTime: string;
+  endTime: string;
+  numCandidates: number;
+  numVotes: number;
+};
