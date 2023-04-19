@@ -15,13 +15,13 @@ export type Candidate = {
   votes: number;
 };
 
-export type campaignResult={
-  _id:string,
-  positionName:string,
-  candidateName:string,
-  votes:number,
-  candidateImg:string
-}
+export type campaignResult = {
+  _id: string;
+  positionName: string;
+  candidateName: string;
+  votes: number;
+  candidateImg: string;
+};
 
 export type VotingPosition = {
   _id: string;
@@ -56,7 +56,7 @@ export interface IUser {
 }
 
 export interface GenericResponse {
-  status: string;
+  status?: string;
   message: string;
 }
 
@@ -64,5 +64,3 @@ export interface ILoginResponse {
   status: string;
   user: IUser;
 }
-
-

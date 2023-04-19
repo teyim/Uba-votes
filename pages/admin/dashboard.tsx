@@ -89,8 +89,14 @@ const Dashboard = () => {
       setshowTripsPage(!showTripsPage);
     }
   };
+
+  function showCampaignCreationSuccessMessage(message: string) {
+    toast.success(message);
+  }
+
   return (
     <>
+      <Toaster />
       {data && !isLoading ? (
         <div className="flex h-screen overflow-hidden ">
           {/* Sidebar */}
@@ -113,7 +119,12 @@ const Dashboard = () => {
                 ></Home>
               )}
               {showCampaignsPage && (
-                <Campaigns data={() => getCampaignData(data!)} />
+                <Campaigns
+                  data={() => getCampaignData(data!)}
+                  showSuccessMessage={(message) =>
+                    showCampaignCreationSuccessMessage(message)
+                  }
+                />
               )}
               {showTripsPage && <Trips />}
             </main>
