@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { IUser } from 'helpers/types';
 import { useEffect, useLayoutEffect } from 'react';
+import { ModalProvider } from 'context/modalContext';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -33,10 +34,12 @@ function Layout({ children }: LayoutProps) {
 
   return (
     <>
-      <section className="overflow-hidden font-roboto">
-        {showNav && <Navbar />}
-        <section>{children}</section>
-      </section>
+      <ModalProvider>
+        <section className="overflow-hidden font-roboto">
+          {showNav && <Navbar />}
+          <section>{children}</section>
+        </section>
+      </ModalProvider>
     </>
   );
 }
