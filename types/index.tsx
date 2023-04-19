@@ -1,3 +1,5 @@
+import { ICampaign } from 'helpers/types';
+
 export type SelectOption = {
   value: string | number;
   label: string;
@@ -28,6 +30,8 @@ export type VoteInput = {
   candidates: string[];
   campaignId: string;
 };
+
+export type CampaignInput = Omit<ICampaign, '_id' | 'votingPositions'>;
 
 export type FilteredCampaign = {
   name: string;

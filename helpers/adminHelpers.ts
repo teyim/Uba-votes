@@ -1,6 +1,6 @@
 import { adminAxiosConfig } from 'axiosConfig/adminAxiosConfig';
-import { adminLoginInput } from 'types';
-import { ICampaign } from './types';
+import { CampaignInput, adminLoginInput } from 'types';
+import { GenericResponse, ICampaign } from './types';
 
 export const login = async (user: adminLoginInput) => {
   const response = await adminAxiosConfig.post<{ token: string }>(
@@ -11,8 +11,14 @@ export const login = async (user: adminLoginInput) => {
 };
 
 export const getAllCampaigns = async () => {
-  const response = await adminAxiosConfig.get<ICampaign[] | []>(
-    `campaigns/`
+  const response = await adminAxiosConfig.get<ICampaign[] | []>(`campaigns/`);
+  return response.data;
+};
+
+export const createCampaign = async (campaignData: CampaignInput) => {
+  const response = await adminAxiosConfig.post<GenericResponse>(
+    'campaigns/createCampaign',
+    campaignData
   );
   return response.data;
 };

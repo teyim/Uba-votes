@@ -7,6 +7,9 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useEffect } from 'react';
 import { useUserStore } from 'utils/storage';
 import { useRouter } from 'next/router';
+import 'react-calendar/dist/Calendar.css';
+import 'react-clock/dist/Clock.css';
+import 'react-datetime-picker/dist/DateTimePicker.css';
 
 const queryClient = new QueryClient({
   defaultOptions: {
