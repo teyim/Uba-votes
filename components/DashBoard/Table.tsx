@@ -2,6 +2,8 @@ import { ICampaign } from 'helpers/types';
 import React from 'react';
 import { FilteredCampaign } from 'types';
 import moment from 'moment';
+import { AiFillEdit } from 'react-icons/ai';
+import { MdDeleteForever } from 'react-icons/md';
 
 type TableProps = {
   tableHeading: string;
@@ -10,18 +12,18 @@ type TableProps = {
 
 function Table({ tableHeading, data }: TableProps) {
   return (
-    <div className="col-span-full xl:col-span-8 bg-white shadow-lg rounded-sm border border-gray-200 overflow-x-scroll mt-8">
+    <div className="col-span-full xl:col-span-8 bg-white shadow-lg rounded-sm border border-gray-400 overflow-x-scroll mt-3 max-h-96 overflow-y-scroll">
       {tableHeading && (
-        <header className="px-5 py-4 border-b border-gray-100">
+        <header className="px-5 py-4 border-b border-gray-400">
           <h2 className="font-semibold text-gray-800">{tableHeading}</h2>
         </header>
       )}
       <div className="p-3">
         {/* Table */}
         <div className="overflow-x-auto border-separate">
-          <table className="table-auto w-full bborder-spacing-y-10">
+          <table className="table-auto w-full ">
             {/* Table header */}
-            <thead className="text-xs uppercase text-gray-400 bg-gray-50 rounded-sm">
+            <thead className="text-xs uppercase text-gray-500 bg-gray-200 rounded-sm">
               <tr>
                 <th className="p-2">
                   <div className="font-semibold text-left">Name</div>
@@ -71,19 +73,17 @@ function Table({ tableHeading, data }: TableProps) {
                     </div>
                   </td>
                   <td className="p-2">
-                    <div className="text-center text-blue-500 hover:underline cursor-pointer">
-                      Edit
+                    <div className="text-center text-indigo-600 hover:underline cursor-pointer">
+                      <AiFillEdit className="w-5 h-5" />
                     </div>
                   </td>
                   <td className="p-2">
                     <div className="text-center text-red-500 hover:underline cursor-pointer">
-                      Delete
+                      <MdDeleteForever className="w-5 h-5" />
                     </div>
                   </td>
                 </tr>
               ))}
-
-              {/* Row */}
             </tbody>
           </table>
         </div>
