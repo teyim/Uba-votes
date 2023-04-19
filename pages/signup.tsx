@@ -145,7 +145,7 @@ const Signup: NextPage = () => {
       <div className="relative w-full md:w-2/3 2xl:w-2/4 max-w-2/3  h-[80%] md:h[90%] flex flex-col ring-1 rounded-md shadow-sm ring-gray-600 py-8 px-6 overflow-y-scroll">
         <form className="mt-2 md:px-7" onSubmit={handleSubmit(submitHandler)}>
           <div className="md:flex justify-evenly">
-            <div className="mb-6">
+            <div className="mb-6 md:w-3/12">
               <label
                 htmlFor="fullname"
                 className="block  mb-2 text-lg  font-medium text-gray-900 "
@@ -162,7 +162,7 @@ const Signup: NextPage = () => {
                 {errors?.fullName?.message as string}
               </span>
             </div>
-            <div className="mb-6">
+            <div className="mb-6 md:w-3/12">
               <label
                 htmlFor="lastname"
                 className="block  mb-2 text-lg  font-medium text-gray-900 "
@@ -179,7 +179,7 @@ const Signup: NextPage = () => {
                 {errors?.matricule?.message as string}
               </span>
             </div>
-            <div className="mb-6">
+            <div className="mb-3 md:w-3/12">
               <label
                 htmlFor="email"
                 className="block  mb-2 text-lg  font-medium text-gray-900 "
