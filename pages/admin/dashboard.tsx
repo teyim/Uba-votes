@@ -25,9 +25,9 @@ const Dashboard = () => {
   if (isError && error?.message) {
     toast.error(error?.response.data);
   }
-  // if (error?.message && isError) {
-  //   toast.error(error?.message);
-  // }
+  if (error?.message && isError) {
+    toast.error(error?.message);
+  }
 
   //
   let totalCampaigns = 0;

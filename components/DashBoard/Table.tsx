@@ -4,6 +4,10 @@ import { FilteredCampaign } from 'types';
 import moment from 'moment';
 import { AiFillEdit } from 'react-icons/ai';
 import { MdDeleteForever } from 'react-icons/md';
+import { useContext } from 'react';
+import { ModalContext } from 'context/modalContext';
+import Campaign from './campaign';
+import { DELETE_CAMPAIGN } from 'data/constants';
 
 type TableProps = {
   tableHeading: string;
@@ -11,6 +15,7 @@ type TableProps = {
 };
 
 function Table({ tableHeading, data }: TableProps) {
+  const { handleModal } = useContext(ModalContext);
   return (
     <div className="col-span-full xl:col-span-8 bg-white shadow-lg rounded-sm border border-gray-400 overflow-x-scroll mt-3 max-h-96 overflow-y-scroll">
       {tableHeading && (
@@ -79,7 +84,17 @@ function Table({ tableHeading, data }: TableProps) {
                   </td>
                   <td className="p-2">
                     <div className="text-center text-red-500 hover:underline cursor-pointer">
-                      <MdDeleteForever className="w-5 h-5" />
+                      <MdDeleteForever
+                        className="w-5 h-5"
+                        onClick={() =>
+                          handleModal(
+                            <Campaign
+                              action={DELETE_CAMPAIGN}
+                              campaignId={campaign.id}
+                            />
+                          )
+                        }
+                      />
                     </div>
                   </td>
                 </tr>

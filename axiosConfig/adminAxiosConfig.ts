@@ -17,3 +17,5 @@ export const adminAxiosConfig = axios.create({
 adminAxiosConfig.defaults.headers.common['Content-Type'] = 'application/json';
 adminAxiosConfig.defaults.headers.post['Authorization'] = token;
 adminAxiosConfig.defaults.headers.get['Authorization'] = token;
+adminAxiosConfig.defaults.headers.delete['Authorization'] = token;
+adminAxiosConfig.defaults.headers.patch['Authorization'] = token;

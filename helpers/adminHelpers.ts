@@ -22,3 +22,10 @@ export const createCampaign = async (campaignData: CampaignInput) => {
   );
   return response.data;
 };
+
+export const deleteCampaign = async (campaignId: string) => {
+  const response = await adminAxiosConfig.delete<ICampaign>(
+    `campaigns/${campaignId}`
+  );
+  return response.data;
+};
