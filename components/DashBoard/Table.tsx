@@ -66,15 +66,13 @@ function Table({ tableHeading, data }: TableProps) {
                   <td className="p-2">
                     <div className="text-center">
                       {moment(campaign.startTime).format(
-                        'MMMM Do YYYY, h:mm:ss a'
+                        'DD/MM/YYYY h:mm:ss a'
                       )}
                     </div>
                   </td>
                   <td className="p-2">
                     <div className="text-center text-light-blue-500">
-                      {moment(campaign.endTime).format(
-                        'MMMM Do YYYY, h:mm:ss a'
-                      )}
+                      {moment(campaign.endTime).format('DD/MM/YYYY h:mm:ss a')}
                     </div>
                   </td>
                   <td className="p-2">
