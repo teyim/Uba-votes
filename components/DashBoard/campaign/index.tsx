@@ -9,14 +9,15 @@ import {
   DELETE_CAMPAIGN,
 } from 'data/constants';
 import DeleteCampaign from './deleteCampaign';
+import { ICampaign } from 'helpers/types';
 
 type CampaignProps = {
   action: string;
   showSuccessMessage?: (message: string) => void;
-  campaignId?: string;
+  campaignData?: ICampaign;
 };
 
-function Campaign({ action, showSuccessMessage, campaignId }: CampaignProps) {
+function Campaign({ action, showSuccessMessage, campaignData }: CampaignProps) {
   return (
     <div className=" w-screen h-screen mx-auto z-30 top-0 fixed flex justify-center content-center items-center ">
       <div className="absolute bg-black top-30 w-screen h-screen opacity-30"></div>
@@ -30,9 +31,14 @@ function Campaign({ action, showSuccessMessage, campaignId }: CampaignProps) {
         {action === CREATE_CAMPAIGN && showSuccessMessage && (
           <CreateCampaign showSuccessMessage={showSuccessMessage} />
         )}
-        {action === UPDATE_CAMPAIGN && <UpdateCampaign />}
-        {action === DELETE_CAMPAIGN && campaignId && (
-          <DeleteCampaign id={campaignId} />
+        {action === UPDATE_CAMPAIGN && showSuccessMessage && (
+          <UpdateCampaign
+            showSuccessMessage={showSuccessMessage}
+            campaignData={campaignData}
+          />
+        )}
+        {action === DELETE_CAMPAIGN && (
+          <DeleteCampaign id={campaignData?._id as string} />
         )}
       </div>
     </div>

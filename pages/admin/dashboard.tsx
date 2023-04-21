@@ -8,8 +8,6 @@ import Campaigns from '@components/DashBoard/Tabs/Campaigns';
 import { useAllCampaignsQuery } from 'hooks/adminHooks';
 import toast, { Toaster } from 'react-hot-toast';
 import ComponentState from '@components/Layout/componentState';
-import { ICampaign } from 'helpers/types';
-import { FilteredCampaign } from 'types';
 
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -17,9 +15,6 @@ const Dashboard = () => {
   const [showCampaignsPage, setShowCampaignsPage] = useState(false);
   const [showTripsPage, setshowTripsPage] = useState(false);
 
-  const [filteredCampaignData, setFilteredCampaignData] = useState<
-    FilteredCampaign[] | []
-  >([]);
   const { data, isLoading, error, isError } = useAllCampaignsQuery();
 
   if (isError && error?.message) {
@@ -43,33 +38,6 @@ const Dashboard = () => {
       });
     });
   });
-
-  function getCampaignData(campaigns: ICampaign[] | []) {
-    if (campaigns) {
-      return campaigns.map((campaign) => {
-        const votingPositions = campaign.votingPositions;
-        const numCandidates = votingPositions.reduce((total, position) => {
-          return total + position.candidates.length;
-        }, 0);
-        const numVotes = votingPositions.reduce((total, position) => {
-          return (
-            total +
-            position.candidates.reduce((votesTotal, candidate) => {
-              return votesTotal + candidate.votes;
-            }, 0)
-          );
-        }, 0);
-        return {
-          name: campaign.name,
-          id: campaign._id,
-          startTime: campaign.startTime,
-          endTime: campaign.endTime,
-          numCandidates,
-          numVotes,
-        };
-      });
-    }
-  }
 
   const togglePages = (pageName: string) => {
     //refactor this code
@@ -120,7 +88,7 @@ const Dashboard = () => {
               )}
               {showCampaignsPage && (
                 <Campaigns
-                  data={() => getCampaignData(data!)}
+                  data={data}
                   showSuccessMessage={(message) =>
                     showCampaignCreationSuccessMessage(message)
                   }

@@ -7,6 +7,7 @@ function DropdownSelect({
   height,
   options,
   onChange,
+  defaultValue,
 }: DropdownSelectProps<SelectOption>) {
   const inputStyle = () => ({
     alignItems: 'center',
@@ -16,12 +17,13 @@ function DropdownSelect({
   const colourStyles = {
     input: (styles: object) => ({ ...styles, ...inputStyle() }),
   };
-  console.log('child');
+  console.log(defaultValue);
 
   return (
     <Select
-      name="select"
+      defaultValue={defaultValue}
       isClearable
+      placeholder={defaultValue?.label}
       isSearchable={false}
       options={options}
       styles={colourStyles}

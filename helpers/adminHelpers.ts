@@ -29,3 +29,14 @@ export const deleteCampaign = async (campaignId: string) => {
   );
   return response.data;
 };
+
+export const updateCampaign = async (
+  campaignData: CampaignInput,
+  campaignId: string
+) => {
+  const response = await adminAxiosConfig.patch<ICampaign>(
+    `campaigns/${campaignId}`,
+    campaignData
+  );
+  return response.data;
+};

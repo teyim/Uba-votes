@@ -5,4 +5,5 @@ export type DropdownSelectProps<T> = {
   height: number;
   options: SelectOption[];
   onChange: (value: T) => void;
+  defaultValue?: T;
 };

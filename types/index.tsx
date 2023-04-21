@@ -33,7 +33,7 @@ export type VoteInput = {
 
 export type CampaignInput = Omit<ICampaign, '_id' | 'votingPositions'>;
 
-export type FilteredCampaign = {
+export type CampaignSummary = {
   name: string;
   id: string;
   startTime: string;

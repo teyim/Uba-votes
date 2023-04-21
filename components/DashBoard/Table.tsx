@@ -1,23 +1,30 @@
 import { ICampaign } from 'helpers/types';
 import React from 'react';
-import { FilteredCampaign } from 'types';
+import { CampaignSummary } from 'types';
 import moment from 'moment';
 import { AiFillEdit } from 'react-icons/ai';
 import { MdDeleteForever } from 'react-icons/md';
 import { useContext } from 'react';
 import { ModalContext } from 'context/modalContext';
 import Campaign from './campaign';
-import { DELETE_CAMPAIGN } from 'data/constants';
+import { DELETE_CAMPAIGN, UPDATE_CAMPAIGN } from 'data/constants';
+import { Toaster, toast } from 'react-hot-toast';
 
 type TableProps = {
   tableHeading: string;
-  data: FilteredCampaign[] | undefined;
+  summaryData: CampaignSummary[] | undefined;
+  data: ICampaign[] | undefined;
 };
 
-function Table({ tableHeading, data }: TableProps) {
+function showCampaignUpdateSuccessMessage(message: string) {
+  toast.success(message);
+}
+
+function Table({ tableHeading, data, summaryData }: TableProps) {
   const { handleModal } = useContext(ModalContext);
   return (
     <div className="col-span-full xl:col-span-8 bg-white shadow-lg rounded-sm border border-gray-400 overflow-x-scroll mt-3 max-h-96 overflow-y-scroll">
+      <Toaster />
       {tableHeading && (
         <header className="px-5 py-4 border-b border-gray-400">
           <h2 className="font-semibold text-gray-800">{tableHeading}</h2>
@@ -50,7 +57,7 @@ function Table({ tableHeading, data }: TableProps) {
             {/* Table body */}
             <tbody className="text-sm font-medium divide-y divide-gray-100">
               {/* Row */}
-              {data?.map((campaign) => (
+              {summaryData?.map((campaign) => (
                 <tr key={campaign.id}>
                   <td className="p-2">
                     <div className="text-gray-800">{campaign.name}</div>
@@ -77,7 +84,22 @@ function Table({ tableHeading, data }: TableProps) {
                   </td>
                   <td className="p-2">
                     <div className="text-center text-indigo-600 hover:underline cursor-pointer">
-                      <AiFillEdit className="w-5 h-5" />
+                      <AiFillEdit
+                        className="w-5 h-5"
+                        onClick={() =>
+                          handleModal(
+                            <Campaign
+                              action={UPDATE_CAMPAIGN}
+                              campaignData={data?.find(
+                                (c) => c?._id === campaign?.id
+                              )}
+                              showSuccessMessage={(message) =>
+                                showCampaignUpdateSuccessMessage(message)
+                              }
+                            />
+                          )
+                        }
+                      />
                     </div>
                   </td>
                   <td className="p-2">
@@ -88,7 +110,9 @@ function Table({ tableHeading, data }: TableProps) {
                           handleModal(
                             <Campaign
                               action={DELETE_CAMPAIGN}
-                              campaignId={campaign.id}
+                              campaignData={data?.find(
+                                (c) => c?._id === campaign?.id
+                              )}
                             />
                           )
                         }
