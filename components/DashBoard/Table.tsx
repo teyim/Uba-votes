@@ -9,10 +9,12 @@ import { ModalContext } from 'context/modalContext';
 import Campaign from './campaign';
 import { DELETE_CAMPAIGN, UPDATE_CAMPAIGN } from 'data/constants';
 import { Toaster, toast } from 'react-hot-toast';
+import { FiPlus } from 'react-icons/fi';
+import Button from '@components/UI/button';
 
 type TableProps = {
   tableHeading: string;
-  summaryData: CampaignSummary[] | undefined;
+  summaryData?: CampaignSummary[] | undefined;
   data: ICampaign[] | undefined;
 };
 
@@ -23,16 +25,27 @@ function showCampaignUpdateSuccessMessage(message: string) {
 function Table({ tableHeading, data, summaryData }: TableProps) {
   const { handleModal } = useContext(ModalContext);
   return (
-    <div className="col-span-full xl:col-span-8 bg-white shadow-lg rounded-sm border border-gray-400 overflow-x-scroll mt-3 max-h-96 overflow-y-scroll">
+    <div className="col-span-full xl:col-span-8 bg-white shadow-sm rounded-sm border border-gray-300 overflow-x-scroll mt-3 max-h-96 overflow-y-scroll">
       <Toaster />
       {tableHeading && (
-        <header className="px-5 py-4 border-b border-gray-400">
-          <h2 className="font-semibold text-gray-800">{tableHeading}</h2>
+        <header className="px-5 py-4 border-b border-gray-300 flex ">
+          <h2 className="font-semibold text-gray-800 my-auto">
+            {tableHeading}
+          </h2>
+          {tableHeading === 'Voting Positions' && (
+            <button
+              onClick={() => alert('hello')}
+              className="flex rounded-sm  ml-10 px-2 py-1 border border-gray-400 hover:bg-indigo-600 hover:text-white"
+            >
+              Add Position
+            </button>
+          )}
         </header>
       )}
-      <div className="p-3">
+
+      <div className="p-3 overflow-x-scroll">
         {/* Table */}
-        <div className="overflow-x-auto border-separate">
+        <div className="md:overflow-x-auto border-separate">
           <table className="table-auto w-full ">
             {/* Table header */}
             <thead className="text-xs uppercase text-gray-500 bg-gray-200 rounded-sm">

@@ -2,7 +2,8 @@ import { Side } from '@tanstack/react-query-devtools/build/lib/utils';
 import React, { useEffect, useRef, useState } from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { MdCampaign } from 'react-icons/md';
-import { RiRoadMapFill, RiLogoutCircleRFill } from 'react-icons/ri';
+import { RiLogoutCircleRFill } from 'react-icons/ri';
+import { BsPeopleFill } from 'react-icons/bs';
 
 type SidebarProps = {
   sidebarOpen: boolean;
@@ -17,7 +18,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen, toggleTabs }: SidebarProps) {
   //change to a single state object
   const [showHome, setShowHome] = useState(true);
   const [showCampaignsPage, setshowCampaignsPage] = useState(false);
-  const [showTripsPage, setshowTripsPage] = useState(false);
+  const [showCandidatesPage, setshowCandidatesPage] = useState(false);
 
   const handleLogOut = () => {
     alert('logout');
@@ -37,21 +38,21 @@ function Sidebar({ sidebarOpen, setSidebarOpen, toggleTabs }: SidebarProps) {
   const togglePages = (pageName: string) => {
     //refactor this code
     if (pageName === 'home') {
-      setshowTripsPage(false);
+      setshowCandidatesPage(false);
       setshowCampaignsPage(false);
       setShowHome(true);
       toggleTabs(pageName);
     }
     if (pageName === 'campaigns') {
-      setshowTripsPage(false);
+      setshowCandidatesPage(false);
       setShowHome(false);
       setshowCampaignsPage(true);
       toggleTabs(pageName);
     }
-    if (pageName === 'tripsPage') {
+    if (pageName === 'candidates') {
       setShowHome(false);
       setshowCampaignsPage(false);
-      setshowTripsPage(true);
+      setshowCandidatesPage(true);
       toggleTabs(pageName);
     }
   };
@@ -144,22 +145,22 @@ function Sidebar({ sidebarOpen, setSidebarOpen, toggleTabs }: SidebarProps) {
             </li>
             <li
               className={`px-3 py-4 rounded-sm mb-0.5 last:mb-0 cursor-pointer ${
-                showTripsPage && 'bg-gray-900'
+                showCandidatesPage && 'bg-gray-900'
               }`}
-              onClick={() => togglePages('tripsPage')}
+              onClick={() => togglePages('candidates')}
             >
               <div
                 className={`block text-gray-200 hover:text-white transition duration-150 ${
-                  showTripsPage && 'hover:text-gray-200'
+                  showCandidatesPage && 'hover:text-gray-200'
                 }`}
               >
                 <div className="flex flex-grow">
-                  <RiRoadMapFill
+                  <BsPeopleFill
                     className={`flex-shrink-0 w-6 h-6 mr-2  text-gray-400 ${
-                      showTripsPage && 'text-indigo-600'
+                      showCandidatesPage && 'text-indigo-600'
                     }`}
                   />
-                  <span className="text-sm font-medium">My Trips</span>
+                  <span className="text-sm font-medium">Candidates</span>
                 </div>
               </div>
             </li>

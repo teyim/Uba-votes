@@ -121,7 +121,7 @@ function UpdateCampaign({
     mutate(data, {
       onSuccess(data) {
         queryClient.invalidateQueries(['allCampaigns']);
-        showSuccessMessage(data?.message);
+        showSuccessMessage('Campaign updated ');
         handleModal();
       },
       onError(error: any) {

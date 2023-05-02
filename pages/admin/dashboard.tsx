@@ -3,7 +3,7 @@ import Header from '@components/DashBoard/Header';
 import Sidebar from '@components/DashBoard/Sidebar';
 import Home from '@components/DashBoard/Tabs/Home';
 import React, { useState, useEffect } from 'react';
-import Trips from '@components/DashBoard/Tabs/Trips';
+import Candidates from '@components/DashBoard/Tabs/Candidates';
 import Campaigns from '@components/DashBoard/Tabs/Campaigns';
 import { useAllCampaignsQuery } from 'hooks/adminHooks';
 import toast, { Toaster } from 'react-hot-toast';
@@ -13,7 +13,7 @@ const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showHome, setShowHome] = useState(true);
   const [showCampaignsPage, setShowCampaignsPage] = useState(false);
-  const [showTripsPage, setshowTripsPage] = useState(false);
+  const [showCandidatesPage, setshowCandidatesPage] = useState(false);
 
   const { data, isLoading, error, isError } = useAllCampaignsQuery();
 
@@ -42,19 +42,19 @@ const Dashboard = () => {
   const togglePages = (pageName: string) => {
     //refactor this code
     if (pageName === 'home' && showHome !== true) {
-      setshowTripsPage(false);
+      setshowCandidatesPage(false);
       setShowCampaignsPage(false);
       setShowHome(!showHome);
     }
     if (pageName === 'campaigns' && showCampaignsPage !== true) {
-      setshowTripsPage(false);
+      setshowCandidatesPage(false);
       setShowHome(false);
       setShowCampaignsPage(!showCampaignsPage);
     }
-    if (pageName === 'tripsPage' && showTripsPage !== true) {
+    if (pageName === 'candidates' && showCandidatesPage !== true) {
       setShowHome(false);
       setShowCampaignsPage(false);
-      setshowTripsPage(!showTripsPage);
+      setshowCandidatesPage(!showCandidatesPage);
     }
   };
 
@@ -94,7 +94,7 @@ const Dashboard = () => {
                   }
                 />
               )}
-              {showTripsPage && <Trips />}
+              {showCandidatesPage && <Candidates />}
             </main>
           </div>
         </div>
