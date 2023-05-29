@@ -39,7 +39,7 @@ function Card({
           {name}
         </h1>
         <h2 className="text-gray-700 my-1 text-lg font-bold">{desc}</h2>
-        <div className="flex my-2">
+        <div className="md:flex my-2">
           <div className="flex mx-1">
             <h3>School:</h3>
             <h3 className="font-semibold">{school}</h3>

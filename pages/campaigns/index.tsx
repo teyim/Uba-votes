@@ -13,13 +13,14 @@ const Campaigns: NextPage = () => {
   const { data, isLoading, error, isError } = useCampaignQuery(
     user?._id as string
   );
+  console.log(data);
 
-  if (isError && !error?.message) {
-    toast.error(error?.response.data);
-  }
-  if (error?.message && isError) {
-    toast.error(error?.message);
-  }
+  // if (isError && !error?.message) {
+  //   toast.error(error?.response.data);
+  // }
+  // if (error?.message && isError) {
+  //   toast.error(error?.message);
+  // }
   return (
     <>
       <Toaster />
@@ -27,7 +28,7 @@ const Campaigns: NextPage = () => {
         <h2 className="text-violet-500 font-unbounded text-2xl font-semibold">
           Ongoing Campaigns
         </h2>
-        <div className="md:w-1/2 my-10 flex flex-col">
+        <div className=" w-[95%] md:w-1/2 my-10 flex flex-col">
           {isLoading && (
             <ComponentState
               currentComponent="Campaigns"

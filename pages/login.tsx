@@ -65,8 +65,12 @@ const Login: NextPage = () => {
         toast.success('Login Successfull');
         const data = queryClient.getQueryData(['userData']);
         setUser(data as IUser);
-        if (data) {
-          router.push('/campaigns');
+        const item = localStorage.getItem('user');
+        if (item) {
+          const token = JSON.parse(item).state?.user?.token;
+          if (token) {
+            router.push('/campaigns');
+          }
         }
       },
       onError(error: any) {

@@ -17,14 +17,17 @@ const Dashboard = () => {
 
   const { data, isLoading, error, isError } = useAllCampaignsQuery();
 
-  if (isError && error?.message) {
-    toast.error(error?.response.data);
-  }
-  if (error?.message && isError) {
-    toast.error(error?.message);
-  }
+  // if (isError && error?.message) {
+  //   toast.error(error?.response.data);
+  // }
+  // if (error?.message && isError) {
+  //   toast.error(error?.message);
+  // }
 
   //
+
+  console.log(data);
+
   let totalCampaigns = 0;
   let totalCandidates = 0;
   let totalVotes = 0;

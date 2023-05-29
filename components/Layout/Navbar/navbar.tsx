@@ -20,7 +20,7 @@ export default function NavBar() {
     router.replace('/');
   };
   return (
-    <nav className="bg-gray-100  font-semibold py-3 shadow-sm border-b-2 px-12">
+    <nav className="bg-gray-100  font-semibold py-3 shadow-sm border-b-2 px-4 md:px-12">
       <div className="max-w-8xl mx-auto  ">
         <div className="flex justify-between">
           <div className="flex justify-center">
