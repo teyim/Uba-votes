@@ -4,7 +4,7 @@ module.exports = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['images.unsplash.com', 'media.istockphoto.com'],
+    domains: ['images.unsplash.com', 'media.istockphoto.com', 'i.ibb.co'],
   },
   typescript: {
     // !! WARN !!
