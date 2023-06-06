@@ -173,7 +173,7 @@ const Signup: NextPage = () => {
                 type="text"
                 {...register('matricule')}
                 className="border border-black text-gray-900 text-sm   block w-full p-2.5 rounded-md "
-                placeholder="Uba19S0363"
+                placeholder="UBa......"
               />
               <span className="text-sm text-red-500">
                 {errors?.matricule?.message as string}
