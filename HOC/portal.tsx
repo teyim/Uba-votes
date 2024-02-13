@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 type ProtalProps = {
-  children: any;
+  children: ReactNode;
 };
 
 function Portal({ children }: ProtalProps) {

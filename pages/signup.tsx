@@ -68,7 +68,7 @@ const Signup: NextPage = () => {
 
   // useEffect(() => {
   //   if (isSubmitSuccessful) {
-  //     reset();
+  //     reset();import DropdownSelect from "../../DropdownSelect";
   //     setSelectedDepartment('');
   //     setSelectedLevel(0);
   //     setSelectedSchool('');
