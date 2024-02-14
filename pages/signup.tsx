@@ -76,9 +76,9 @@ const Signup: NextPage = () => {
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [isSubmitSuccessful]);
 
-  const { mutate, isLoading } = useMutation((userData: RegisterInput) =>
-    signUp(userData)
-  );
+  const { mutate, isPending } = useMutation({
+    mutationFn: (userData: RegisterInput) => signUp(userData),
+  });
 
   const schoolSelectHandler = useCallback(
     (selectedValue: SelectOption | undefined) =>
@@ -281,12 +281,12 @@ const Signup: NextPage = () => {
               !selectedDepartment ||
               !selectedLevel ||
               !selectedSchool ||
-              isLoading
+              isPending
                 ? true
                 : false
             }
           >
-            {isLoading ? 'Creating Account...' : ' Create Account'}
+            {isPending ? 'Creating Account...' : ' Create Account'}
           </button>
         </form>
         {!selectedDepartment && selectedSchool ? (

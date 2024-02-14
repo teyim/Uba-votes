@@ -49,14 +49,13 @@ const Login: NextPage = () => {
     formState: { errors, isSubmitSuccessful },
   } = useForm(formOptions);
 
-  const { mutate, isLoading } = useMutation(
-    (userData: userLoginInput) => login(userData),
-    {
-      onSuccess(data) {
-        queryClient.setQueryData(['userData'], data);
-      },
-    }
-  );
+  const { mutate, isPending } = useMutation({
+    mutationFn: (userData: userLoginInput) => login(userData),
+
+    onSuccess(data) {
+      queryClient.setQueryData(['userData'], data);
+    },
+  });
 
   function submitHandler(data: any) {
     // ? Execute the mutate;
@@ -137,9 +136,9 @@ const Login: NextPage = () => {
           <button
             type="submit"
             className="py-2 px-4  hover:border-2 text-black block ring-2 ring-gray-700 hover:bg-violet-600 hover:text-white rounded-md text-lg font-semibold mx-auto my-4 disabled:bg-gray-500 disabled:text-black disabled:ring-0 disabled:border-0"
-            disabled={isLoading ? true : false}
+            disabled={isPending ? true : false}
           >
-            {isLoading ? 'Loging in...' : 'Login'}
+            {isPending ? 'Loging in...' : 'Login'}
           </button>
         </form>
 
