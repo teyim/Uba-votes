@@ -122,10 +122,10 @@ const Signup: NextPage = () => {
       onError(error: any) {
         if (Array.isArray((error as any).response.data.error)) {
           (error as any).response.data.error.forEach((el: any) =>
-            toast.error(el.message)
+            console.log(error)
           );
         } else {
-          toast.error(error.response.data);
+          console.log(error);
         }
       },
     });

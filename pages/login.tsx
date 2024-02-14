@@ -109,7 +109,8 @@ const Login: NextPage = () => {
                 type="text"
                 {...register('matricule')}
                 className="border border-black text-gray-900 text-sm   block w-full p-2.5 rounded-md "
-                placeholder="UBa19S0111"
+                placeholder="Matricule"
+                name="matricule"
               />
               <span className="text-sm text-red-500">
                 {errors?.matricule?.message as string}
@@ -125,7 +126,7 @@ const Login: NextPage = () => {
               <input
                 type="password"
                 className="border border-black text-gray-900 text-sm   block w-full p-2.5 rounded-md"
-                placeholder="Enter password"
+                placeholder="Password"
                 {...register('password')}
               />
               <span className="text-sm text-red-500">
