@@ -300,7 +300,7 @@ const Signup: NextPage = () => {
 
         <h3 className="text-center my-2">
           Already have an account?{' '}
-          <Link passHref href="/login">
+          <Link passHref href="/login" legacyBehavior>
             <a className="font-semibold cursor-pointer hover:text-violet-600 hover:underline">
               Login
             </a>

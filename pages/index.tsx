@@ -41,20 +41,20 @@ const Home: NextPage = () => {
           </h2>
           {!userData ? (
             <>
-              <Link href="/signup" passHref>
+              <Link href="/signup" passHref legacyBehavior>
                 <a className="text-lg text-center mt-5 ring-1 ring-gray-300 bg-gray-300 bg-opacity-10 w-2/4 py-3 rounded-md hover:bg-orange-300 hover:ring-orange-300 hover:text-gray-800">
                   Signup
                 </a>
               </Link>
 
-              <Link href="/login" passHref>
+              <Link href="/login" passHref legacyBehavior>
                 <a className="mt-5 w-2/4  text-orange-300 hover:underline ">
                   Already have an account?
                 </a>
               </Link>
             </>
           ) : (
-            <Link href="/campaigns" passHref>
+            <Link href="/campaigns" passHref legacyBehavior>
               <a className="text-lg text-center mt-5 ring-1 ring-gray-300 bg-gray-300 bg-opacity-10 w-2/4 py-3 rounded-md hover:bg-orange-300 hover:ring-orange-300 hover:text-gray-800">
                 View Campaigns
               </a>

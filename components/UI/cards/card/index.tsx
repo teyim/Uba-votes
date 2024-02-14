@@ -60,7 +60,7 @@ function Card({
           </h4>
         </div>
         {!disabled && !hasVoted && hasVotingStarted && !hasVotingEnded && (
-          <Link href={`/campaigns/${id}`}>
+          <Link href={`/campaigns/${id}`} legacyBehavior>
             <a className="py-2 px-4  hover:border-2 text-black block ring-2 ring-gray-700 hover:bg-violet-600 hover:text-white rounded-md text-lg font-semibold mx-auto my-4 disabled:bg-gray-500 disabled:text-black disabled:ring-0 disabled:border-0">
               View Campaign
             </a>
@@ -80,7 +80,7 @@ function Card({
         {!disabled && hasVotingEnded && (
           <div className="text-violet-600 font-medium">
             Campaign has ended
-            <Link passHref href={`/results/${id}`}>
+            <Link passHref href={`/results/${id}`} legacyBehavior>
               <a className="underline text-black block my-1">View results</a>
             </Link>
           </div>

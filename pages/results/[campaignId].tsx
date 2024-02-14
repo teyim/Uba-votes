@@ -25,7 +25,7 @@ const Results: NextPage = () => {
     <>
       <Toaster />
       <section className="my-5 px-8 py-4 flex flex-col items-center ">
-        <Link passHref href="/campaigns">
+        <Link passHref href="/campaigns" legacyBehavior>
           <a className="p-1 px-3 rounded-md border-2 border-gray-700 flex justify-center align-middle my-4 hover:bg-gray-700 hover:text-white">
             <BiArrowBack className="my-auto mx-2" />
             Back
@@ -43,14 +43,13 @@ const Results: NextPage = () => {
               <h1 className="my-4 text-xl text-violet-600 font-bold">
                 {votingPosition.positionName}
               </h1>
-              <div>
+              <div className="w-[50px] h-[50px] rounded-full mx-auto">
                 <Image
                   src={votingPosition.candidateImg}
-                  layout="fixed"
-                  width={70}
-                  height={70}
                   alt="user image"
-                  className="rounded-full"
+                  width={100}
+                  height={100}
+                  className="rounded-full w-full h-full "
                 />
               </div>
               <span className="text-xl font-bold mt-2 uppercase">
